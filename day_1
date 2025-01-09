@@ -1,0 +1,13 @@
+ Q 1. Product : product_id, product_name, supplier_id, price  Supplier : supplier_id, supplier_name, country.  
+
+
+Question – write an sql query to find the name of the product with the highest price in each country. Return product name, country and price.
+
+
+
+select * from  (Select p.product_name, 
+                       s.country,
+                       p.price,
+                       dense_rank() over(partition by s.country order by p.price desc) as rn 
+          from product p left join supplier s on p.supplier_id = s.supplier_id) as sub
+where rn = 3;
