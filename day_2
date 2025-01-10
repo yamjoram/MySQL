@@ -1,0 +1,13 @@
+Customer : customer_id, customer_name, registration_date  Transaction : customer_id, transaction_id, transaction_date, amount.
+Question : write a query to calculate total transaction amount for each customer for the current year. Return customer_name and total amount. 
+
+select 
+    c.customer_id, 
+    c.customer_name, 
+    sum(t.amount) as amount 
+from customer c 
+left join transaction t 
+  on t.customer_id = c.customer_id 
+where extract(year from registration_date) = extract(year from current_date()) 
+group by 1, 2 
+order by 1;
