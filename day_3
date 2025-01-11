@@ -1,0 +1,8 @@
+Students : id, name, gender. 
+Question : Given table student_details, write a query which displays names alternately by gender and sorted by ascending order of column ID.
+
+with cte as (select *, row_number() over(partition by gender order by id) as rn)
+select id, name, gender, rn
+from cte
+order by rn, case when gender = "M" then 1 else 2 end;
+
