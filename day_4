@@ -1,0 +1,6 @@
+Q 127. Employees : Emp_id, Emp_Name, Manager_Id. 
+Write a query to display employee names along with manager names.
+
+select e1.emp_id, e1.emp_name, e2.emp_name as manager_name 
+from employees e1 
+left join employees e2 on e1.manager_id = e2.emp_id;
