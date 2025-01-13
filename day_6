@@ -1,0 +1,31 @@
+Orders : order_id, customer_id, order_datetime, item_id, order_quantity. 
+Items : item_id, item_category.
+
+Questions 1 : How many units were ordered yesterday?
+select count(*) as units_ordered 
+from orders
+where extract(day from order_datetime) = extract(day from current_date()) - 1;
+
+Questions 2 : In the last 7 days (including today), how many units were ordered in each category?
+
+select item_category, sum(order_quantity) as total_item_ordered
+from items i 
+left join orders o 
+  on o.item_id = i.item_id 
+where extract(day from order_datetime) between extract(day from current_time()) - 7 and extract(day from current_time())
+group by 1;
+
+Questions 3 : Write a query to get the earliest order_id for all customers for each date they placed an order.
+
+select order_id from (select customer_id, order_id, order_datetime, date(order_datetime) as date, 
+                             dense_rank() over(partition by customer_id, date(order_datetime) order by order_datetime) as rnk
+                      from orders) as sub 
+  where rnk = 1;
+
+
+Questions 4 : Write a query to find the second earliest order_id for each customer for each date they placed 3 or more orders.
+
+select order_id from (select customer_id, order_id, order_datetime, date(order_datetime) as date, 
+                             dense_rank() over(partition by customer_id, date(order_datetime) order by order_datetime) as rnk
+                      from orders) as sub 
+  where rnk = 2;
