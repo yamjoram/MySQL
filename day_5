@@ -1,0 +1,23 @@
+1. Sales : store_name, sale_date, sales_amount. 
+Question : Calculate each store running total. Growth ratio compare to previous month. Return store name, sales amount, running total, growth ratio
+Growth Ration = current_sales - previous_sales * 100 / previous_sales
+
+select store_name, sales_amount, running_total, 
+       (sales_amount - previous_amount) * 100 / previous_amount as growth_ratio
+from ( select store_name, sales_amount, 
+       sum(sales_amount) over(partition by store_name order by sale_date) as running_total,
+       lag(sales_amount) over(partition by store_name order by sale_date) as previous_amount
+from sales) as sub ;
+
+
+
+2. Employee_salary : employee_id, name, year, salary, department.
+  Questions : Identify the employee who received at least 3 year over year increase in salaries!
+
+select distinct employee_id, name
+from (select employee_id, name, salary,
+             row_number() over(partition by employee_id order by year) as rn,
+             lag(salary) over(partition by employee_id order by year) as previous_salary
+     from employee_salary) as sub
+where salary > previous_salary and rn > 3;
+          
