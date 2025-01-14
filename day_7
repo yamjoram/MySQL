@@ -1,0 +1,12 @@
+Trips : id, driver_id, city, trip_distance, start_time, end_time, rating.
+
+Questions : Write an SQL query to find the average trip duration for each driver in each city excluding trips where the rating is below 3.
+  The result should include driver_id, city, and average_trip_duration rounded to two decimal places. 
+
+Note:
+The average_trip_duration is calculated as the average of the differences between end_time and start_time for each trip.
+
+select driver_id, trip, round(avg(timestampdiff(second(start_time, end_time)),2) as average_duration 
+from trips 
+where rating >= 3
+group by 1, 2;
