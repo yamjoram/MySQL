@@ -1,0 +1,17 @@
+Cities : city_id, city_name
+Restaurants : restaurant_id, restaurant_name, city_id
+Orders : order_id, restaurant_id, order_value, order_date, rating
+
+Questions : Write a SQL query to find the top 2 restaurants in each city with the highest average rating. 
+            If two restaurants have the same average rating, they should have the same rank.
+
+select * from (select city_id, city_name, restaurant_id, restaurant_name, avg(rating) as avg_rating,
+                     dense_rank() over(partition by city_id order by avg(rating) desc) as rnk
+              from cities c 
+              left join restaurants r
+                on r.city_id = c.city_id 
+              left join Orders o 
+                on o.restauarnt_id = r.restauarant_id 
+              group by 1, 2, 3, 4) as sub 
+where rnk <= 2;
+
