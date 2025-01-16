@@ -1,0 +1,25 @@
+Products : product_id, product_name, category, price
+Sales : sale_id, product_id, customer_id, sale_date, quantity, amount
+Customers : customer_id, customer_name, customer_city, customer_state
+
+Questions1 : Write a query to calculate the average monthly sales for each category. Return category that has highest average sale in each month!
+
+select * from (select extract(month from s.sale_date) as month, p.category, sum(amount) as monthly_sales,
+                      dense_rank() over(partition by extract(month from s.sale_date), p.category order by sum(s.amount) desc) as rnk
+              from products p 
+              left join sales s 
+                on p.product_id = s.product_id
+              group by 1, 2) as sub 
+where rnk = 1;
+
+
+Questions2 : Write a query to identify the customers who spent the most money during the Big Billion Days Sale (November 24-27) in 2023.
+
+select * from (select c.customer_id, c.customer_name, sum(s.amount) as total_amount,
+                     dense_rank() over(order by sum(s.amount) desc) as rnk 
+              from customers c 
+              left join sales s 
+                on c.customer_id = s.customer_id 
+              where s.sale_date between "2023-11-24" and "2023-11-27"
+              group by 1, 2) as sub 
+where rnk = 1;
