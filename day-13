@@ -1,0 +1,14 @@
+Amazon_sales : customer_id, purchase_date, amount.
+
+Questions : Write a SQL query to find the customer IDs who have made purchases consecutively in every month up to the current month (July 2024) of this year.
+
+
+with monthly_sale as (select customer_id, extract(month from purchase_date) as month
+                      from amazon_sales
+                      where extract(year from purchase_date) = 2024 
+                      group by 1, 2),
+cnt as (select customer_id, count(month) as total_purchased 
+        from monthly_sale
+        group by 1 
+        having count(month) = 7)
+select customer_id from cnt;
