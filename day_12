@@ -1,0 +1,9 @@
+employees : id, name, salary
+Questions : Write SQL query to fetch nth highest salary!
+
+select * from (select *, dense_rank() over(order by salary desc) as rnk
+                from salary) as sub 
+where rnk = 3;
+
+
+
