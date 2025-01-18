@@ -1,0 +1,24 @@
+Restaurants : id, name, location
+Orders : id, restaurant_id, order_time, dispatch_time
+
+Questions : /*
+You are given two tables: Restaurants and Orders. After receiving an order, 
+each restaurant has 15 minutes to dispatch it. Dispatch times are categorized as follows:
+
+on_time_dispatch: Dispatched within 15 minutes of order received.
+late_dispatch: Dispatched between 15 and 20 minutes after order received.
+super_late_dispatch: Dispatched after 20 minutes.
+Task: Write an SQL query to count the number of dispatched orders in each category for each restaurant.
+*/
+
+
+with cte as (select r.id as restaurant_id, r.name as name,o.dispatch_time, o.order_time, 
+                  (minute(dispatch_time) - minute(order_time)) as diff
+            from Restaurants r 
+            left join Orders o 
+            ON o.restaurant_id = r.id)
+select restaurant_id, name,
+      sum(case when diff <= 15 then 1 else 0 end) as on_time_dispatch,
+      sum(case when diff > 15 and diff <= 20 then 1 else 0 end) as late_dispatch,
+      sum(case when diff > 20 then 1 else 0 end) as super_late_dispatch
+from cte group by 1, 2;
