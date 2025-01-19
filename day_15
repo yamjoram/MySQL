@@ -1,0 +1,13 @@
+Users : user_id, user_name, credit_limit
+Transactions : trans_id, paid_by, paid_to, amount, trans_date
+
+Questions : write a query to find users whose transactions has breached their credit limit
+
+with cte as (select user_id,user_name, sum(credit_limit) as total_limit from users u 
+             group by 1, 2),
+cte2 as (select paid_by, sum(amount) as total_spent from transactions
+         group by 1)
+select user_id, user_name from cte
+left join cte2
+  on cte2.paid_by = cte.user_id
+where cte.total_limit < cte2.total_spent;
