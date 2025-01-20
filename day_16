@@ -1,0 +1,14 @@
+User_activities : user_id, activity, activity_time
+
+Questions : Find out each users and productivity time in hour(productivity time = login - logout time)
+
+with cte as (select user_id,
+                   activity,
+                   activity_time,
+                   lag(activity) over(partition by user_id order by activity_time) as previous_activity,
+                   lag(activity_time) over(partition by user_id order by activity_time) as previous_time
+            from user_activities)
+  select user_id, (unix_timestamp(activity_time) - unix_timestamp(previous_time))/3600 as productive_time
+  from cte
+  where previous_activity = "Login"
+  and activity = "Logout";
