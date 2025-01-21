@@ -1,0 +1,16 @@
+Users : user_id, name, mail
+
+Question_1 : Write SQL Query to find users whose email addresses contain only lowercase letters before the @ symbol
+
+select user_id, name, mail
+from Users
+where mail regexp '^[a-z]+@[a-z]+.[a-z]+$';
+
+
+
+
+Question_2 : Find email that has lowercase and numbers before the @ symbol!
+
+select user_id, name, mail
+from Users
+where mail regexp '^[a-z.0-9]+@[a-z]+.[a-z]+$';
