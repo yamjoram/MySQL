@@ -1,0 +1,16 @@
+Users: user_id, user_name, country
+Plays: user_id, song_id, genre, listening_time
+
+Questions_1 : which genre of music has the highest average listening time per user.
+
+select * from (select user_id, genre, avg(listening_time) as avg_time,
+                      dense_rank() over(partition by user_id order by avg(listening_time) desc) as rnk
+              from plays
+              group by 1, 2) as sub 
+where rnk = 1;
+
+Questions_2 : write an query for classic avg listen time by each user 
+select user_id, avg(listening_time) as avg_time 
+from plays
+where genre = "Classical"
+group by 1 ;
