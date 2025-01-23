@@ -1,0 +1,21 @@
+Spotify : user_id, song_id, play_date
+Questions: Write a SQL query to find the song_id and week_start 
+date of all songs that had a play count increase of 
+at least 300% from one week to the next. 
+Consider weeks starting on Mondays.
+
+
+with weekly_played as (select 
+                          song_id, 
+                          extract(week from play_date) as weeks,
+                          count(*) as cnt_songs_played 
+                      from spotify
+                      group by 1, 2),
+previous_played as (select *, 
+                          lag(cnt_songs_played) over(partition by song_id order by weeks) as previous_songs_played
+                    from weekly_played)
+select *,
+      (cnt_songs_played - previous_songs_played /previous_songs_played )* 100 as percent
+from previous_played
+where cnt_songs_played > previous_songs_played
+having (cnt_songs_played - previous_songs_played/previous_songs_played )* 100 >= 300;
