@@ -1,0 +1,10 @@
+User_activity : user_id, login_date
+
+Questions_1: Write a SQL query to find all users who have logged in on at least 3 consecutive days.
+
+select user_id, count(*) as cnt from (select user_id, login_date
+from user_activity
+group by 1, 2) as sub
+group by 1 
+having count(*) >= 3;
+
