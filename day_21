@@ -1,0 +1,26 @@
+CREATE TABLE cinemas
+    (id SERIAL, seat_id INT);
+
+INSERT INTO cinemas(seat_id)
+VALUES
+    (1),
+    (0),
+    (0),
+    (1),
+    (1),
+    (1),
+    (0);
+
+-- Write a SQL query to find the id where the seat is empty
+-- and both the seat immediately before and immediately after it are also empty
+
+
+-- 1 ---> empty
+-- 0 ---> full
+
+select * from (select
+                  id, seat_id,
+                  lag(seat_id) over(order by id) as previous_seat,
+                  lead(seat_id) over(order by id) as next_seat
+              from cinemas) as sub
+where seat_id = 1 and previous_seat = 1 and next_seat = 1;
