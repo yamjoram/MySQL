@@ -1,0 +1,18 @@
+Friends : id, friend_id
+Ratings : id, rating
+
+
+Questions : -- Retrieve all Ids of a person whose rating is greater than friend's id
+            -- If person does not have any friend, retrieve only their id only if rating greater than 85
+
+
+
+  select f.id from friends f 
+  left join ratings r
+      on r.id = f.id
+  left join ratings r2
+      on r2.id = f.friend_id
+  where
+      f.friend_id is not null and r.rating > r2.rating
+      or
+      f.friend_id is null and r.rating > 85;
