@@ -1,0 +1,21 @@
+Orders : order_id, customer_id, order_date, order_amount.
+
+Questions : -- You are working with a table called orders that tracks customer orders with their order dates and amounts. 
+
+            -- Write a query to find each customer’s latest order amount
+            -- along with the amount of the second latest order. 
+            
+            -- Your output should be like 
+            -- customer_id, lastest_order_amount, second_lastest_order_amount    
+
+
+
+
+with cte as (select customer_id,order_date, order_amount, 
+        dense_rank() over(partition by customer_id order by order_date desc) as rnk 
+from orders), 
+cte2 as (select customer_id, order_amount as latest_order_amount from cte where rnk = 1),
+cte3 as (select customer_id, order_amount as second_latest_order_amount from cte where rnk = 2)
+select cte2.customer_id, cte2.latest_order_amount, cte3.second_latest_order_amount 
+from cte2
+left join cte3 on cte3.customer_id = cte2.customer_id;
