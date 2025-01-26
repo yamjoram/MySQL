@@ -1,0 +1,13 @@
+Sales : sale_date, sale_amount
+
+Questions : -- You have a table of daily sales data of Amazon. Write a query to:
+            -- Find the total sales for each weekend day (Saturday and Sunday) in July 2024.
+
+
+select 
+      extract(week from sale_date) as weekend,
+      sum(sale_amount) as amount
+from sales
+where sale_date between "2024-07-01" and "2024-07-31"
+and dayofweek(sale_date) in (1,7)
+group by 1;
