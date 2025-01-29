@@ -1,0 +1,22 @@
+CREATE TABLE suppliers ( supplier_id INT PRIMARY KEY, supplier_name VARCHAR(100)
+);
+CREATE TABLE products ( product_id INT PRIMARY KEY, product_name VARCHAR(100), 
+                        category VARCHAR(50), supplier_id INT
+);
+
+
+
+INSERT INTO suppliers VALUES (1, 'Supplier A'),
+(2, 'Supplier B');
+INSERT INTO products VALUES
+(1, 'Smartphone', 'Electronics', 1),
+(2, 'Washing Machine', 'Appliances', 2);
+
+
+Questions : Find all suppliers who provide products in the Electronics category.
+
+
+select s.* from suppliers  s 
+left join products p 
+  on s.supplier_id = p.supplier_id
+where p.category = "Electronics";
