@@ -1,43 +1,18 @@
-SELECT h.hacker_id, h.name, COUNT(c.challenge_id) AS challenge_count
-FROM Hackers h
-LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-GROUP BY h.hacker_id, h.name
-HAVING COUNT(c.challenge_id) = (
-    SELECT MAX(hc.count) 
-    FROM (
-        SELECT COUNT(c.challenge_id) AS count 
-        FROM Hackers h
-        LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-        GROUP BY h.hacker_id
-    ) AS hc
-)
-OR (
-    COUNT(c.challenge_id) < (
-        SELECT MAX(hc.count) 
-        FROM (
-            SELECT COUNT(c.challenge_id) AS count 
-            FROM Hackers h
-            LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-            GROUP BY h.hacker_id
-        ) AS hc
-    )
-    AND (
-        SELECT COUNT(*) 
-        FROM (
-            SELECT COUNT(c.challenge_id) AS count 
-            FROM Hackers h
-            LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-            GROUP BY h.hacker_id
-        ) AS hc
-        WHERE hc.count = (
-            SELECT MAX(hc.count) 
-            FROM (
-                SELECT COUNT(c.challenge_id) AS count 
-                FROM Hackers h
-                LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-                GROUP BY h.hacker_id
-            ) AS hc
-        )
-    ) = 1
-)
-ORDER BY challenge_count DESC, h.hacker_id;
+CREATE TABLE patents (
+patent_id INT PRIMARY KEY, company VARCHAR(50), filing_year INT
+);
+-- Sample data for patents
+INSERT INTO patents (patent_id, company, filing_year) VALUES
+(1, 'Microsoft', 2021),
+(2, 'Microsoft', 2020), 
+(3, 'Microsoft', 2020),
+(4, 'Apple', 2021),
+(5, 'Microsoft', 2021);
+
+Questions : Find the year with the highest number of new patents filed by Microsoft.
+
+
+select filing_year, count(patent_id) as cnt 
+from patents
+where company = "Microsoft"
+group by 1;
