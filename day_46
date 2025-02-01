@@ -1,43 +1,41 @@
-SELECT h.hacker_id, h.name, COUNT(c.challenge_id) AS challenge_count
-FROM Hackers h
-LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-GROUP BY h.hacker_id, h.name
-HAVING COUNT(c.challenge_id) = (
-    SELECT MAX(hc.count) 
-    FROM (
-        SELECT COUNT(c.challenge_id) AS count 
-        FROM Hackers h
-        LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-        GROUP BY h.hacker_id
-    ) AS hc
-)
-OR (
-    COUNT(c.challenge_id) < (
-        SELECT MAX(hc.count) 
-        FROM (
-            SELECT COUNT(c.challenge_id) AS count 
-            FROM Hackers h
-            LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-            GROUP BY h.hacker_id
-        ) AS hc
-    )
-    AND (
-        SELECT COUNT(*) 
-        FROM (
-            SELECT COUNT(c.challenge_id) AS count 
-            FROM Hackers h
-            LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-            GROUP BY h.hacker_id
-        ) AS hc
-        WHERE hc.count = (
-            SELECT MAX(hc.count) 
-            FROM (
-                SELECT COUNT(c.challenge_id) AS count 
-                FROM Hackers h
-                LEFT JOIN Challenges c ON h.hacker_id = c.hacker_id
-                GROUP BY h.hacker_id
-            ) AS hc
-        )
-    ) = 1
-)
-ORDER BY challenge_count DESC, h.hacker_id;
+CREATE TABLE products (
+product_id INT PRIMARY KEY, 
+name VARCHAR(50),
+company VARCHAR(50),
+price DECIMAL(15, 2)
+);
+
+CREATE TABLE sales (
+sale_id INT PRIMARY KEY,
+product_id INT,
+quantity INT,
+FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+INSERT INTO products (product_id, name, company, price) VALUES
+(1, 'iPhone', 'Apple', 1000),
+(2, 'MacBook Pro', 'Apple', 2500), 
+(3, 'iPad', 'Apple', 500),
+(4, 'Apple Watch', 'Apple', 400),
+(5, 'AirPods', 'Apple', 150),
+(6, 'iMac', 'Apple', 1800),
+(7, 'iPhone 13', 'Apple', 1200), 
+(8, 'Apple TV', 'Apple', 200);
+
+INSERT INTO sales (sale_id, product_id, quantity) VALUES
+(1, 1, 5000), -- iPhone
+(2, 2, 3000), -- MacBook Pro (3, 3, 7000), -- iPad
+(4, 4, 10000), -- Apple Watch (5, 5, 12000), -- AirPods
+(6, 6, 2000), -- iMac
+(7, 7, 4000);-- iPhone 13 (8, 8, 8000); -- Apple TV
+
+
+Questions : Find the total sales for the top 5 performing products of Apple.
+
+
+select * from (select p.product_id, p.name, sum(p.price * s.quantity) as total_sales,
+      dense_rank() over(order by sum(p.price * s.quantity) desc) as rnk 
+from products p 
+left join sales s 
+  on p.product_id = s.product_id
+group by 1, 2) as sub where rnk < 6; 
