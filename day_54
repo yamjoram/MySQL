@@ -1,0 +1,31 @@
+CREATE TABLE quarterly_revenue (
+id INT PRIMARY KEY, company VARCHAR(50), product_name VARCHAR(50), quarter VARCHAR(10), revenue DECIMAL(15, 2)
+);
+-- Sample data: Quarterly revenue for products at Amazon
+INSERT INTO quarterly_revenue (id, company, product_name, quarter, revenue )
+VALUES
+(1, 'Amazon', 'Laptop', 'Q1', 150000.00),
+(2, 'Amazon', 'Laptop', 'Q2', 130000.00),
+(3, 'Amazon', 'Laptop', 'Q3', 120000.00),
+(4, 'Amazon', 'Smartphone', 'Q1', 250000.00), 
+(5, 'Amazon', 'Smartphone', 'Q2', 240000.00),
+(6, 'Amazon', 'Smartphone', 'Q3', 230000.00), 
+(7, 'Amazon', 'Headphones', 'Q1', 50000.00), 
+(8, 'Amazon', 'Headphones', 'Q2', 52000.00),
+(9, 'Amazon', 'Headphones', 'Q3', 51000.00);
+
+
+Questions : Identify products from Amazon that had declining sales over the last 3 quarters.
+
+
+
+select * from (select *,
+lag(revenue) over(partition by company, product_name order by quarter) as previous_sale,
+lag(revenue,2) over(partition by company, product_name order by quarter) as Previous_previous_sale
+
+from quarterly_revenue) as sub 
+where revenue < previous_sale and previous_sale < Previous_previous_sale;
+
+
+
+
