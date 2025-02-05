@@ -1,0 +1,36 @@
+CREATE TABLE customers (
+customer_id INT PRIMARY KEY,
+customer_name VARCHAR(100) );
+CREATE TABLE orders (
+order_id INT PRIMARY KEY,
+customer_id INT,
+amount DECIMAL(10, 2),
+order_date DATE,
+FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+-- Sample data insertions
+INSERT INTO customers (customer_id, customer_name) VALUES (1, 'Anjali'),
+(2, 'Rohan'),
+(3, 'Suresh'),
+(4, 'Priya'),
+(5, 'Rahul');
+INSERT INTO orders (order_id, customer_id, amount, order_date) VALUES
+(1, 1, 2500, '2023-01-01'),
+(2, 2, 3000, '2023-01-02'),
+(3, 1, 1500,  '2023-02-03'),
+(4, 3, 4000, '2023-02-12'),
+(5, 1, 3000, '2023-01-05'),
+(6, 2, 4500, '2023-01-06'),
+(7, 4, 5000, '2023-01-07'),
+(8, 5, 2000, '2023-01-08');
+
+
+Questions : Write a SQL query to find the customer who made the most recent order.
+
+select c.customer_id, c.customer_name
+from customers c
+left join orders o 
+  on o.customer_id = c.customer_id
+where o.order_date = (
+select max(order_date) as last_date
+from orders);
