@@ -1,0 +1,30 @@
+CREATE TABLE suppliers (
+supplier_id INT PRIMARY KEY,
+supplier_name VARCHAR(100) );
+CREATE TABLE contracts (
+contract_id INT PRIMARY KEY,
+supplier_id INT,
+company VARCHAR(50), 
+contract_date DATE
+);
+-- Sample data insertions 
+INSERT INTO suppliers VALUES
+(1, 'Tech Supplies Ltd'),
+(2, 'Finance Services Ltd');
+INSERT INTO contracts VALUES
+(1, 1, 'Barclays', '2023-02-10'), 
+(2, 1, 'HSBC', '2023-02-25');
+
+Questions : Determine the total number of unique suppliers used by both Barclays and
+HSBC in the same year.
+
+
+
+select count(distinct s.supplier_id) as unique_supplier
+from contracts c 
+left join suppliers s 
+  on c.supplier_id = s.supplier_id 
+where c.company in ("Barclays", "HSBC")
+group by c.supplier_id, extract(year from c.contract_date)
+having count(distinct c.company) = 2;
+
