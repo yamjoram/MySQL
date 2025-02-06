@@ -1,0 +1,36 @@
+CREATE TABLE products (
+product_id INT, product_name VARCHAR(100), category_id INT, manufacturer VARCHAR(100)
+);
+CREATE TABLE reviews ( review_id INT,
+product_id INT,
+rating DECIMAL(2, 1) );
+-- Sample data insertions 
+INSERT INTO products VALUES
+(1, 'Laptop', 1, 'BrandA'),
+(2, 'Smartphone', 1, 'BrandB'),
+(3, 'Tablet', 2, 'BrandC'),
+(4, 'Headphones', 2, 'BrandA'),
+(5, 'Smartwatch', 3, 'BrandD');
+INSERT INTO reviews VALUES 
+(1, 1, 4.5),
+         (2, 1, 4.7),
+         (3, 2, 4.3),
+         (4, 2, 4.8),
+         (5, 3, 4.0),
+         (6, 3, 4.5),
+         (7, 4, 4.8),
+         (8, 5, 4.2);
+
+
+Questions : Find the top 5 products with the highest average rating in each category,
+including their manufacturer and the number of reviews.
+
+
+select * from (select category_id, product_name, manufacturer, 
+avg(rating) as avg_rating, 
+count(review_id) as num_of_review, 
+dense_rank() over(partition by category_id order by avg(rating) desc ) as rnk 
+from products p 
+left join reviews r 
+  on p.product_id = r.product_id
+group by 1, 2, 3) as sub where rnk <= 5;
