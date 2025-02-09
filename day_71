@@ -1,0 +1,38 @@
+CREATE TABLE Transactions ( id INT PRIMARY KEY, country VARCHAR(255), state VARCHAR(255),
+amount INT,
+trans_date DATE );
+-- Insert sample records
+INSERT INTO Transactions (id, country, state, amount, trans_date) VALUES 
+(121, 'US', 'approved', 1000, '2018-12-18'),
+(122, 'US', 'declined', 2000, '2018-12-19'),
+(123, 'US', 'approved', 2000, '2019-01-01'),
+(124, 'DE', 'approved', 2000, '2019-01-07');
+
+
+Questions : Write an SQL query to find, for each month and country, the number of transactions and their total amount, as well as the number of 
+            approved transactions and their total amount. The result should be ordered by country and month.
+
+
+  
+select extract(month from trans_date) as month,
+       country,
+       count(*) as transaction_cnt,
+       sum(amount) as trans_amount,
+       sum(case when state = "approved" then 1 else 0 end) as approved_cnt,
+       sum(case when state = "approved" then amount else 0 end) as approved_amount
+from Transactions
+group by 1, 2
+order by 1, 2;
+
+
+-- Alternative --
+
+select date_format(trans_date, "%Y-%m")as month,
+       country,
+       count(*) as transaction_cnt,
+       sum(amount) as trans_amount,
+       sum(case when state = "approved" then 1 else 0 end) as approved_cnt,
+       sum(case when state = "approved" then amount else 0 end) as approved_amount
+from Transactions
+group by 1, 2
+order by 1, 2;
