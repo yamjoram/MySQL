@@ -1,0 +1,19 @@
+CREATE TABLE tiktok ( views INT
+);
+-- Insert records into the tiktok table INSERT INTO tiktok (views)
+VALUES
+(100), (800), (350), (150), (600),
+(700), (700), (950);
+
+Questions : Find the median within a series of numbers in SQL.
+
+with cte as (select views, row_number() over(order by views) as rnk,
+        count(*) over() as cnt 
+from tiktok), cte2 as (
+select 
+    case when cnt % 2 = 0 then
+            (select avg(views) from cte where rnk in (cnt/2, cnt/2 + 1))
+      else (select views from cte where rnk = cnt/2 + 1) end as median
+from cte) select median from cte2
+limit 1;
+
