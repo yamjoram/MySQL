@@ -1,0 +1,28 @@
+CREATE TABLE job_listings ( job_id INTEGER PRIMARY KEY, company_id INTEGER,
+title TEXT,
+description TEXT );
+-- Insert sample records
+INSERT INTO job_listings (job_id, company_id, title, description) VALUES
+(248, 827, 'Business Analyst', 'Business analyst evaluates past and cu rrent business data with the primary goal of improving decision-making pro cesses within organizations.'),
+(149, 845, 'Business Analyst', 'Business analyst evaluates past and cu rrent business data with the primary goal of improving decision-making pro cesses within organizations.'),
+(945, 345, 'Data Analyst', 'Data analyst reviews data to identify key insights into a business''s customers and ways the data can be used to sol ve problems.'),
+(164, 345, 'Data Analyst', 'Data analyst reviews data to identify key insights into a business''s customers and ways ve problems.'),
+(172, 244, 'Data Engineer', 'Data engineer ngs to build systems that collect, manage, and e information for data scientists and business the data can be used to sol works in a variety of setti convert raw data into usabl analysts to interpret.'),
+(573, 456, 'Software Engineer', 'Software engineer designs, develops, tests, and maintains software applications.'),
+(324, 789, 'Software Engineer', 'Software engineer designs, develops, tests, and maintains software applications.'),
+(890, 123, 'Data Scientist', 'Data scientist analyzes and interprets c omplex data to help organizations make informed decisions.'),
+(753, 123, 'Data Scientist', 'Data scientist analyzes and interprets complex data to help organizations make informed decisions.');
+
+
+Questions : Write a query to retrieve the count of companies that have posted duplicate job listings.
+            Duplicate job listings are defined as two job listings within the same company that share identical titles and descriptions.
+
+
+
+select company_id from (
+select j1.company_id, count(j1.company_id) as cnt 
+from job_listings j1
+left join job_listings j2
+  on j1.company_id = j2.company_id
+  and j1.title = j2.title and j1.description = j2.description
+group by 1 ) as sub where cnt > 1;
