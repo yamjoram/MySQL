@@ -1,0 +1,37 @@
+CREATE TABLE lenskart_purchases (
+purchase_id INT PRIMARY KEY,
+customer_id INT,
+product_name VARCHAR(255),
+product_category VARCHAR(50), -- Eyewear, Sunglasses, etc. 
+quantity INT,
+price DECIMAL(10, 2),
+purchase_date DATE );
+-- Insert sample records into lenskart_purchases
+INSERT INTO lenskart_purchases 
+(purchase_id, customer_id, product_name, product_category, quantity, price, purchase_date)
+VALUES
+(101, 1, 'Aviator Sunglasses', 'Sunglasses', 1, 2500.00, '2024-05-15') ,
+(102, 2, 'Round Eyewear', 'Eyewear', 2, 1500.00, '2024-06-10'),
+(103, 3, 'Wayfarer Sunglasses', 'Sunglasses', 1, 3000.00, '2024-07-01' ),
+(104, 1, 'Cat Eye Sunglasses', 'Sunglasses', 1, 3500.00, '2024-07-05') ,
+(105, 2, 'Square Eyewear', 'Eyewear', 1, 1200.00, '2024-07-12'),
+(106, 4, 'Polarized Sunglasses', 'Sunglasses', 2, 2000.00, '2024-08-05 '),
+(107, 3, 'Goggles', 'Eyewear', 1, 1800.00, '2024-08-15'),
+(108, 1, 'Aviator Sunglasses', 'Sunglasses', 1, 2500.00, '2024-08-20') ,
+(109, 5, 'Round Eyewear', 'Eyewear', 3, 1500.00, '2024-08-25'),
+(110, 2, 'Wayfarer Eyewear', 'Eyewear', 1, 2000.00, '2024-09-01'), 
+(111, 6, 'Aviator Sunglasses', 'Sunglasses', 1, 2500.00, '2024-09-10'),
+(112, 7, 'Cat Eye Eyewear', 'Eyewear', 1, 3000.00, '2024-09-15');
+
+
+Questions : Identify the customers who have purchased eyewear or sunglasses from Lenskart, 
+            along with the total number of items they have bought, the total amount spent, and their rank based
+          on the total amount spent. Display the customer ID, total number of items, total amount spent, and rank.
+
+            
+
+select customer_id, count(*) as total_number, sum(quantity * price) as total_amount,
+        dense_rank() over(order by sum(quantity * price) desc) as rnk
+from lenskart_purchases
+where product_category in ("Eyewear", "Sunglasses")
+group by 1;
