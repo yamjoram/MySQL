@@ -1,0 +1,18 @@
+CREATE TABLE Orders (
+OrderID INT, CustomerID INT, OrderDate DATE, OrderTime TIME, Amount DECIMAL(10, 2)
+);
+-- Datasets (assumes all orders are for 31st December 2024)
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, OrderTime, Amount) VALUES 
+(1, 101, '2024-12-31', '09:30:00', 500.00),
+(2, 102, '2024-12-31', '08:15:00', 300.00),
+(3, 103, '2024-12-31', '10:00:00', 150.00),
+(4, 104, '2024-12-31', '12:45:00', 200.00),
+(5, 105, '2024-12-31', '11:00:00', 400.00);
+
+Questions : Select the first order received time on 31st December 2024 from the Orders table.
+
+select OrderTime
+from Orders
+where OrderDate = "2024-12-31"
+order by 1 
+limit 1;
