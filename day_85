@@ -1,0 +1,17 @@
+CREATE TABLE Licenses (
+LicenseID INT, SoftwareName VARCHAR(50), LicenseType VARCHAR(50), Price DECIMAL(10, 2)
+);
+-- Datasets
+INSERT INTO Licenses (LicenseID, SoftwareName, LicenseType, Price) VALUES 
+(1, 'Microsoft Office', 'Personal', 69.99),
+(2, 'Microsoft Office', 'Business', 149.99),
+(3, 'Windows 11', 'Home', 119.99),
+(4, 'Windows 11', 'Pro', 199.99),
+(5, 'Azure', 'Enterprise', 499.99);
+
+
+Questions : Display distinct license types available for Microsoft software. 
+
+select distinct LicenseType
+from Licenses
+where SoftwareName = "Microsoft Office";
