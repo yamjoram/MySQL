@@ -1,0 +1,16 @@
+CREATE TABLE NetflixTitles (
+TitleID INT,
+TitleName VARCHAR(50), Genre VARCHAR(50), ReleaseYear INT
+);
+-- Datasets
+INSERT INTO NetflixTitles (TitleID, TitleName, Genre, ReleaseYear) VALUES 
+(1, 'Stranger Things', 'Sci-Fi', 2016),
+(2, 'The Crown', 'Drama', 2016),
+(3, 'Money Heist', 'Thriller', 2017),
+(4, 'Bridgerton', 'Romance', 2020),
+(5, 'Breaking Bad', 'Crime', 2008);
+
+Questions : Find all genres of Netflix titles.
+
+
+select distinct Genre from NetflixTitles;
