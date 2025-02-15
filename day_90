@@ -1,0 +1,17 @@
+CREATE TABLE AircraftOrders (
+OrderID INT,
+CustomerName VARCHAR(50), AircraftModel VARCHAR(50), Quantity INT
+);
+-- Datasets
+INSERT INTO AircraftOrders (OrderID, CustomerName, AircraftModel, Quantity) VALUES
+(1, 'Lufthansa', 'A320', 60),
+(2, 'Air France', 'A380', 30),
+(3, 'British Airways', 'A350', 70),
+(4, 'Ryanair', 'A320', 40),
+(5, 'Iberia', 'A321', 55);
+
+Questions : Retrieve all aircraft orders where the quantity is greater than 50 from the AircraftOrders table.
+
+select OrderID
+from AircraftOrders
+where Quantity > 50;
