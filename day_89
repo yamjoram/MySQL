@@ -1,0 +1,16 @@
+CREATE TABLE Locations (
+LocationID INT,
+City VARCHAR(50), Country VARCHAR(50), Population INT
+);
+-- Datasets
+INSERT INTO Locations (LocationID, City, Country, Population) VALUES 
+(1, 'Mumbai', 'India', 20000000),
+(2, 'Delhi', 'India', 19000000),
+(3, 'New York', 'USA', 8500000),
+(4, 'Los Angeles', 'USA', 4000000),
+(5, 'Mumbai', 'India', 20000000);
+
+Questions : Count the number of distinct cities in the Locations table.
+
+select count(distinct City) as cnt 
+from Locations;
