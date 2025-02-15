@@ -1,0 +1,16 @@
+CREATE TABLE Users (
+UserID INT,
+UserName VARCHAR(50), DOB DATE
+);
+-- Datasets
+INSERT INTO Users (UserID, UserName, DOB) VALUES 
+(1, 'Alice', '1990-06-15'),
+(2, 'Bob', NULL),
+(3, 'Charlie', '1985-09-22'),
+(4, 'David', NULL),
+(5, 'Eve', '1992-01-11');
+
+Questions : Count how many rows in the Users table have a non-null date of birth (DOB).
+
+select count(*) from Users
+where DOB is not null;
