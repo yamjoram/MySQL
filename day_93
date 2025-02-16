@@ -1,0 +1,20 @@
+-- Table creation
+CREATE TABLE ProductInventory (
+ProductID INT, ProductName VARCHAR(50), Price DECIMAL(10, 2), Stock INT
+);
+-- Datasets
+INSERT INTO ProductInventory (ProductID, ProductName, Price, Stock) VALUES
+(1, 'Dining Table', 150.00, 100),
+(2, 'Coffee Table', 180.00, 200),
+(3, 'Office Chair', 100.00, 300),
+(4, 'Bed Frame', 250.00, 150), 
+(5, 'Side Table', 90.00, 500);
+
+Questions : Retrieve all products with "Table" in their name and a price less than 200 EUR from the ProductInventory table.
+
+
+
+
+select ProductName, Price
+from ProductInventory
+where ProductName like "%Table%" and Price < 200;
