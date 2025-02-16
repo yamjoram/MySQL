@@ -1,0 +1,17 @@
+CREATE TABLE UserSubscriptions (
+UserID INT,
+UserName VARCHAR(50), SubscriptionType VARCHAR(50), JoinYear INT
+);
+-- Datasets
+INSERT INTO UserSubscriptions (UserID, UserName, SubscriptionType, JoinYear) VALUES
+(1, 'Alice', 'Premium', 2023),
+(2, 'Bob', 'Free', 2022),
+(3, 'Charlie', 'Premium', 2024),
+(4, 'Diana', 'Free', 2021),
+(5, 'Eve', 'Premium', 2021);
+
+Questions : Retrieve all users with a Premium subscription who joined after 2022 from the UserSubscriptions table.
+
+select *
+from UserSubscriptions
+where SubscriptionType = "Premium" and JoinYear > 2022;
