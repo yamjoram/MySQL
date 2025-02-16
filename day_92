@@ -1,0 +1,18 @@
+CREATE TABLE FuelSales (
+SaleID INT,
+FuelType VARCHAR(50), QuantityLiters INT, SaleAmount DECIMAL(10, 2)
+);
+-- Datasets
+INSERT INTO FuelSales (SaleID, FuelType, QuantityLiters, SaleAmount) VALUES 
+(1, 'Diesel', 1200, 2500.00),
+(2, 'Petrol', 800, 2000.00),
+(3, 'Diesel', 4000, 5000.00),
+(4, 'Diesel', 6000, 8000.00),
+(5, 'Petrol', 1500, 3000.00);
+
+Questions : Retrieve all sales of Diesel where the quantity is between 1000 and 5000 liters from the FuelSales table.
+
+select * 
+from FuelSales
+where FuelType = "Diesel"
+and QuantityLiters between 1000 and 1500;
