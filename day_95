@@ -1,0 +1,19 @@
+-- Table creation
+CREATE TABLE ProductSales (
+SaleID INT,
+ProductCategory VARCHAR(50), Country VARCHAR(50), UnitsSold INT
+);
+-- Datasets
+INSERT INTO ProductSales (SaleID, ProductCategory, Country, UnitsSold) VALUES 
+(1, 'Chocolate', 'Germany', 600),
+(2, 'Chocolate', 'France', 700),
+(3, 'Beverage', 'Germany', 400),
+(4, 'Snacks', 'France', 300),
+(5, 'Chocolate', 'Spain', 200);
+
+Questions : Retrieve all chocolate products sold in either Germany or France with sales above 500 units from the ProductSales table.
+
+select *
+from ProductSales
+where ProductCategory = "Chocolate" and Country in ("Germany", "France")
+and UnitsSold > 500;
