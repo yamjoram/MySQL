@@ -1,0 +1,20 @@
+-- Table creation
+CREATE TABLE NetworkUsage (
+UsageID INT,
+UserID INT,
+AverageDailyUsageGB DECIMAL(5, 2)
+);
+-- Datasets
+INSERT INTO NetworkUsage (UsageID, UserID, AverageDailyUsageGB) VALUES 
+(1, 101, 2.5),
+(2, 102, 1.8),
+(3, 103, 4.7),
+(4, 104, 5.5),
+(5, 105, 3.2);
+
+
+Questions : Retrieve all users whose average daily data usage exceeds 2GB but is below 5GB from the NetworkUsage table.
+
+select UserID
+from NetworkUsage
+where AverageDailyUsageGB > 2 and AverageDailyUsageGB < 5;
