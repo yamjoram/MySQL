@@ -1,0 +1,18 @@
+CREATE TABLE Rides (
+RideID INT,
+CustomerID INT, RideType VARCHAR(50), Distance DECIMAL(5, 2), Price DECIMAL(10, 2)
+);
+-- Datasets
+INSERT INTO Rides (RideID, CustomerID, RideType, Distance, Price) VALUES
+(1, 401, 'UberX', 5.2, 12.50),
+(2, 402, 'UberXL', 10.5, 25.00),
+(3, 403, 'UberX', 7.8, 15.00),
+(4, 404, 'Uber Black', 3.2, 20.00),
+(5, 405, 'UberXL', 8.1, 30.00);
+
+Questions : Fetch all distinct ride types offered by Uber, along with the average price for each ride type.
+
+select RideType, avg(Price) as avg_price
+from Rides
+where RideType like "Uber%"
+group by 1;
