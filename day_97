@@ -1,0 +1,16 @@
+CREATE TABLE Products (
+ProductID INT, ProductName VARCHAR(50), Manufacturer VARCHAR(50), Price DECIMAL(10, 2)
+);
+INSERT INTO Products (ProductID, ProductName, Manufacturer, Price) VALUES 
+(1, 'Laptop', 'Company A', 1200.00),
+(2, 'Smartphone', 'Company B', 800.00),
+(3, 'Tablet', 'Company A', 600.00),
+(4, 'Smartwatch', 'Company B', 200.00),
+(5, 'Laptop', 'Company A', 1100.00);
+
+
+Questions : Retrieve the distinct product names along with their corresponding average price from each manufacturer.
+
+select distinct ProductID, ProductName, Manufacturer, avg(Price) as avg_price
+from Products
+group by 1, 2, 3;
