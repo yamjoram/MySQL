@@ -1,0 +1,18 @@
+CREATE TABLE Employees (
+EmployeeID INT, EmployeeName VARCHAR(50), Department VARCHAR(50), Salary DECIMAL(10, 2)
+);
+-- Datasets
+INSERT INTO Employees (EmployeeID, EmployeeName, Department, Salary) VALUES 
+(1, 'Alice', 'Engineering', 100000.00),
+(2, 'Bob', 'Engineering', 95000.00),
+(3, 'Charlie', 'HR', 70000.00),
+(4, 'David', 'HR', 75000.00),
+(5, 'Eve', 'Marketing', 60000.00);
+
+
+Questions : Select the average salary per department and the department with the highest average salary.
+
+select Department, avg_salary from (
+select Department, avg(Salary) as avg_salary, dense_rank() over(order by avg(salary) desc) as rnk 
+from Employees
+group by 1 ) as sub where rnk = 1;
