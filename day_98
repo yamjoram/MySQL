@@ -1,0 +1,19 @@
+CREATE TABLE Orders (
+OrderID INT,
+CustomerID INT, CustomerName VARCHAR(50), Amount DECIMAL(10, 2)
+);
+-- Datasets
+INSERT INTO Orders (OrderID, CustomerID, CustomerName, Amount) VALUES
+(1, 101, 'Alice', 250.00),
+(2, 102, 'Bob', 150.00),
+(3, 101, 'Alice', 100.00),
+(4, 103, 'Charlie', 200.00),
+(5, 102, 'Bob', 50.00);
+
+
+Questions : Select the customer names along with their corresponding order IDs and the total amount spent for each order.
+
+
+select CustomerID, OrderID, sum(Amount) as total_spent
+from Orders
+group by 1, 2;
