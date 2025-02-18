@@ -1,0 +1,19 @@
+CREATE TABLE Purchases (
+PurchaseID INT, CustomerID INT, CustomerName VARCHAR(50), Amount DECIMAL(10, 2), PurchaseDate DATE
+);
+-- Datasets
+INSERT INTO Purchases (PurchaseID, CustomerID, CustomerName, Amount, PurchaseDate ) VALUES
+(1, 101, 'Alice', 250.00, '2024-01-10'),
+(2, 102, 'Bob', 150.00, '2024-02-20'),
+(3, 101, 'Alice', 100.00, '2024-03-15'),
+(4, 103, 'Charlie', 200.00, '2024-04-01'),
+(5, 102, 'Bob', 50.00, '2024-05-22');
+
+
+Questions : Select the total amount spent by each customer, along with the date of their first and last purchase.
+
+
+select CustomerID, CustomerName, sum(Amount) as total_spent, 
+        min(PurchaseDate) as first_purchase_date, max(PurchaseDate) as last_purchase_date
+from Purchases
+group by 1, 2;
