@@ -1,0 +1,19 @@
+CREATE TABLE SpaceMissions (
+MissionID INT,
+MissionName VARCHAR(50), LaunchCountry VARCHAR(50), LaunchDate DATE
+);
+-- Datasets
+INSERT INTO SpaceMissions (MissionID, MissionName, LaunchCountry, LaunchDate) VALUES
+(1, 'Apollo 11', 'USA', '1969-07-16'),
+(2, 'Luna 2', 'USSR', '1959-09-12'),
+(3, 'Voyager 1', 'USA', '1977-09-05'),
+(4, 'Mars Rover', 'USA', '2003-06-10'),
+(5, 'Venera 7', 'USSR', '1970-08-17');
+
+Questions : Find the number of missions launched by each country and filter those with more than 2 missions from the SpaceMissions table.
+
+
+select LaunchCountry, count(MissionID) as num_of_mission
+from SpaceMissions
+group by 1 
+having count(MissionID) > 2;
