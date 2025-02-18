@@ -1,0 +1,24 @@
+CREATE TABLE MusicStreams (
+StreamID INT, ArtistName VARCHAR(50), Streams INT
+);
+-- Datasets with additional records
+INSERT INTO MusicStreams (StreamID, ArtistName, Streams) VALUES
+(1, 'Taylor Swift', 1200),
+(2, 'Ed Sheeran', 800),
+(3, 'Drake', 2000),
+(4, 'BTS', 1500),
+(5, 'Adele', 700),
+(6, 'Billie Eilish', 1800),
+(7, 'Justin Bieber', 2200),
+(8, 'Ariana Grande', 2500),
+(9, 'Post Malone', 3200),
+(10, 'Lil Nas X', 1100),
+(11, 'Shawn Mendes', 1200),
+(12, 'The Weeknd', 500);
+
+Questions : Find the total number of streams for each artist and filter for artists with more than 1000 streams from the MusicStreams table.
+
+select ArtistName, sum(Streams) as total_streams
+from MusicStreams
+group by 1 
+having sum(Streams) > 1000;
