@@ -1,0 +1,26 @@
+CREATE TABLE FuelTypes (
+SaleID INT,
+FuelType VARCHAR(50), QuantityLiters INT
+);
+-- Datasets with additional records
+INSERT INTO FuelTypes (SaleID, FuelType, QuantityLiters) VALUES 
+(1, 'Diesel', 2000),
+(2, 'Petrol', 1800),
+(3, 'Diesel', 3500),
+(4, 'Petrol', 4000),
+(5, 'Gasoline', 1000),
+(6, 'Diesel', 4500),
+(7, 'Petrol', 2200),
+(8, 'Diesel', 6000),
+(9, 'Gasoline', 2000),
+(10, 'Diesel', 3000),
+(11, 'Petrol', 5000),
+(12, 'Gasoline', 1500);
+
+Questions : Find the total quantity of fuel sold for each type and filter fuel types with total sales exceeding 5000 liters from the FuelTypes table.
+
+
+select FuelType, sum(QuantityLiters) as total_litre_sold
+from FuelTypes
+group by 1 
+having sum(QuantityLiters) > 5000;
