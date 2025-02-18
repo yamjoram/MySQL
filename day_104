@@ -1,0 +1,18 @@
+CREATE TABLE AircraftDeliveries (
+DeliveryID INT, Model VARCHAR(50), UnitsDelivered INT
+);
+-- Datasets
+INSERT INTO AircraftDeliveries (DeliveryID, Model, UnitsDelivered) VALUES
+(1, 'A320', 30),
+(2, 'A380', 20),
+(3, 'A350', 60),
+(4, 'A320', 40),
+(5, 'A321', 70);
+
+Questions : List the number of aircraft delivered for each model and filter for models with total deliveries exceeding 50 from the AircraftDeliveries table.
+
+
+select Model, sum(UnitsDelivered) as total_delivered
+from AircraftDeliveries
+group by 1 
+having sum(UnitsDelivered) > 50;
