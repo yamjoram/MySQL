@@ -1,0 +1,28 @@
+CREATE TABLE ProductReturns ( ReturnID INT,
+CategoryName VARCHAR(50),
+ReturnReason VARCHAR(100) );
+INSERT INTO ProductReturns (ReturnID, CategoryName, ReturnReason) VALUES 
+(1, 'Shoes', 'Size issue'),
+(2, 'Apparel', 'Defect'),
+(3, 'Shoes', 'Damaged'),
+(4, 'Apparel', 'Color mismatch'), (5, 'Shoes', 'Wrong size'),
+(6, 'Shoes', 'Quality issue'), (7, 'Apparel', 'Defect'),
+(8, 'Shoes', 'Size issue'),
+(9, 'Accessories', 'Color mismatch'), (10, 'Shoes', 'Wrong size'),
+(11, 'Shoes', 'Damaged'),
+(12, 'Apparel', 'Size issue'),
+(13, 'Accessories', 'Defect'),
+(14, 'Shoes', 'Quality issue'),
+(15, 'Apparel', 'Fit issue'),
+(16, 'Shoes', 'Wrong size'),
+(17, 'Accessories', 'Color mismatch'), (18, 'Shoes', 'Defect'),
+(19, 'Apparel', 'Defect'),
+(20, 'Shoes', 'Size issue');
+
+Questions : Count the number of returns for each category and filter categories with more than 3 returns.
+
+
+select CategoryName, count(ReturnID) as num_of_return
+from ProductReturns
+group by 1
+having count(ReturnID) > 3;
