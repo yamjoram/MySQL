@@ -1,0 +1,23 @@
+CREATE TABLE ProductCategories (
+ProductID INT, CategoryName VARCHAR(50), ProductName VARCHAR(50)
+);
+-- Datasets with more product entries
+INSERT INTO ProductCategories (ProductID, CategoryName, ProductName) VALUES 
+(1, 'Chocolate', 'KitKat'),
+(2, 'Beverages', 'Nescafe'),
+(3, 'Chocolate', 'Munch'),
+(4, 'Beverages', 'Nestea'),
+(5, 'Chocolate', 'MilkyBar'),
+(6, 'Chocolate', 'DairyMilk'),
+(7, 'Beverages', 'Lipton'),
+(8, 'Beverages', 'CocaCola'),
+(9, 'Snacks', 'Lays'),
+(10, 'Snacks', 'Doritos');
+
+Questions : Count the distinct products sold for each category and filter categories with more than 2 distinct products from the ProductCategories table.
+
+
+select CategoryName, count(distinct ProductName) as distinct_cnt
+from ProductCategories
+group by 1 
+having count(distinct ProductName) > 2;
