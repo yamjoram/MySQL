@@ -1,0 +1,33 @@
+
+CREATE TABLE ProductSales ( SaleID INT,
+ProductID INT,
+ProductName VARCHAR(100), Category VARCHAR(50), CustomerID INT,
+SaleAmount DECIMAL(10, 2), SaleDate DATE
+);
+
+
+INSERT INTO ProductSales (SaleID, ProductID, ProductName, Category, CustomerID, SaleAmount, SaleDate) VALUES
+(1, 101, 'Laptop', 'Electronics', 201, 1200.00, '2023-01-01'),
+(2, 102, 'Phone', 'Electronics', 202, 800.00, '2023-01-10'),
+(3, 103, 'Shoes', 'Apparel', 201, 150.00, '2023-02-15'),
+(4, 104, 'Jacket', 'Apparel', 203, 350.00, '2023-02-20'),
+(5, 105, 'Headphones', 'Electronics', 204, 300.00, '2023-03-05'), 
+(6, 106, 'Smartwatch', 'Electronics', 201, 900.00, '2023-03-10'),
+(7, 107, 'Shirt', 'Apparel', 202, 100.00, '2023-04-01'),
+(8, 108, 'Laptop', 'Electronics', 203, 1300.00, '2023-04-05'),
+(9, 109, 'Phone', 'Electronics', 205, 500.00, '2023-04-10'),
+(10, 110, 'Shoes', 'Apparel', 206, 200.00, '2023-05-15'),
+(11, 111, 'Tablet', 'Electronics', 207, 1100.00, '2023-05-25'),
+(12, 112, 'Shirt', 'Apparel', 204, 250.00, '2023-06-05'),
+(13, 113, 'Smartwatch', 'Electronics', 201, 1100.00, '2023-06-20');
+
+
+Questions : Find the top 5 customers who spent the most on products in each product category. 
+            Include only customers who have spent more than 1000 EUR in a single category and sort by the total amount spent in descending order.
+
+select * from (
+select CustomerID, Category, sum(SaleAmount) as total_spent,
+        dense_rank() over(order by sum(SaleAmount) desc) as rnk
+from ProductSales
+group by 1, 2 ) as sub 
+where rnk < 5 and total_spent > 1000;
