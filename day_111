@@ -1,0 +1,27 @@
+CREATE TABLE PatientVisits ( VisitID INT,
+Department VARCHAR(50), PatientID INT, VisitCount INT
+);
+
+INSERT INTO PatientVisits (VisitID, Department, PatientID, VisitCount) VALUES 
+(1, 'Cardiology', 201, 3),
+(2, 'Neurology', 202, 4),
+(3, 'Orthopedics', 203, 5),
+(4, 'Cardiology', 204, 6), 
+(5, 'Neurology', 205, 7), 
+(6, 'Orthopedics', 206, 2),
+(7, 'Pediatrics', 207, 8), 
+(8, 'Cardiology', 208, 4), 
+(9, 'Orthopedics', 209, 5), 
+(10, 'Pediatrics', 210, 5), 
+(11, 'Neurology', 211, 6), 
+(12, 'Orthopedics', 212, 4), 
+(13, 'Cardiology', 213, 3),
+(14, 'Pediatrics', 214, 9),
+(15, 'Orthopedics', 215, 6);
+
+Questions : Find the total number of patient visits by department and filter departments with more than 20 visits.
+
+select Department, sum(VisitCount) as total_visit
+from PatientVisits
+group by 1
+having sum(VisitCount) > 20;
