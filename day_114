@@ -1,0 +1,28 @@
+CREATE TABLE SalesReturns ( ReturnID INT,
+ProductID INT,
+ProductName VARCHAR(100), SaleAmount DECIMAL(10, 2), ReturnAmount DECIMAL(10, 2), ReturnDate DATE
+);
+INSERT INTO SalesReturns (ReturnID, ProductID, ProductName, SaleAmount, ReturnAmount, ReturnDate) VALUES
+(1, 201, 'Laptop', 1500.00, 200.00, '2023-01-10'),
+(2, 202, 'Phone', 800.00, 120.00, '2023-01-20'),
+(3, 201, 'Laptop', 1200.00, 150.00, '2023-02-05'), 
+(4, 203, 'Shoes', 100.00, 20.00, '2023-02-15'),
+(5, 204, 'Headphones', 150.00, 50.00, '2023-03-01'),
+(6, 201, 'Laptop', 1300.00, 300.00, '2023-03-10'), 
+(7, 205, 'Smartwatch', 200.00, 80.00, '2023-03-25'), 
+(8, 201, 'Laptop', 1200.00, 250.00, '2023-04-05'),
+(9, 203, 'Shoes', 150.00, 30.00, '2023-04-10'),
+(10, 202, 'Phone', 900.00, 100.00, '2023-05-01'),
+(11, 201, 'Laptop', 1800.00, 400.00, '2023-05-10'),
+(12, 205, 'Smartwatch', 300.00, 90.00, '2023-05-15'), 
+(13, 204, 'Headphones', 250.00, 60.00, '2023-06-01');
+
+Questions : Identify the products that have more than 10 returns and have an average return amount greater than 100 EUR. 
+            Only include products where the total sales amount is greater than 5000 EUR.
+
+
+select ProductName, count(ReturnID) as total_return, avg(ReturnAmount) as avg_return_amount,
+sum(SaleAmount) as total_amount
+from SalesReturns
+group by 1 
+having avg(ReturnAmount) > 100 and sum(SaleAmount) > 5000;
