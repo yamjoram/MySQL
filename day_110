@@ -1,0 +1,23 @@
+CREATE TABLE BookBorrowing ( BorrowID INT,
+MemberID INT,
+BookTitle VARCHAR(100), BorrowCount INT
+);
+
+
+INSERT INTO BookBorrowing (BorrowID, MemberID, BookTitle, BorrowCount) VALUES (1, 101, 'Introduction to SQL', 3),
+(2, 102, 'Advanced SQL', 5),
+(3, 103, 'Database Design', 4),
+(4, 101, 'Data Structures', 2), 
+(5, 102, 'Algorithms', 6),
+(6, 104, 'Operating Systems', 1), 
+(7, 105, 'Computer Networks', 7),
+(8, 101, 'Machine Learning', 3), 
+(9, 103, 'Web Development', 6), 
+(10, 105, 'Cloud Computing', 5);
+
+Questions : Find the number of books borrowed by each member and filter members who borrowed more than 10 books in total.
+
+select MemberID, sum(BorrowCount) as total_borrowed
+from BookBorrowing
+group by 1
+having sum(BorrowCount) > 10;
