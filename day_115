@@ -1,0 +1,46 @@
+CREATE TABLE ProductSales ( SaleID INT,
+ProductID INT,
+ProductName VARCHAR(100), SaleAmount DECIMAL(10, 2), SaleDate DATE
+);
+CREATE TABLE ProductReturns ( ReturnID INT,
+ProductID INT,
+ReturnAmount DECIMAL(10, 2), ReturnDate DATE
+);
+
+
+INSERT INTO ProductSales (SaleID, ProductID, ProductName, SaleAmount, SaleDate) VALUES
+(1, 101, 'Laptop', 1500.00, '2023-01-01'),
+(2, 101, 'Laptop', 1200.00, '2023-01-15'),
+(3, 102, 'Phone', 800.00, '2023-02-10'),
+(4, 101, 'Laptop', 1300.00, '2023-02-20'),
+(5, 103, 'Headphones', 150.00, '2023-03-01'),
+(6, 102, 'Phone', 900.00, '2023-03-05'),
+(7, 104, 'Smartwatch', 300.00, '2023-04-01'),
+(8, 101, 'Laptop', 1600.00, '2023-04-10'),
+(9, 102, 'Phone', 700.00, '2023-05-15'),
+(10, 103, 'Headphones', 250.00, '2023-06-01'),
+(11, 101, 'Laptop', 1200.00, '2023-06-20');
+
+
+INSERT INTO ProductReturns (ReturnID, ProductID, ReturnAmount, ReturnDate) VALUES 
+(1, 101, 200.00, '2023-01-10'),
+(2, 101, 250.00, '2023-02-05'),
+(3, 102, 120.00, '2023-02-15'),
+(4, 101, 300.00, '2023-03-01'), 
+(5, 102, 150.00, '2023-03-20'), 
+(6, 101, 250.00, '2023-04-01'),
+(7, 103, 50.00, '2023-05-10'),
+(8, 102, 100.00, '2023-05-25'), 
+(9, 101, 400.00, '2023-06-05'), 
+(10, 103, 75.00, '2023-06-15');
+
+
+Questions : Identify the top 5 products with the highest return rate, where the return rate is defined as the percentage of returns relative to the total number of sales. 
+            Include only products where the total number of returns is greater than 20, and filter for products where the return rate is greater than 15%.
+
+select s.ProductName, (count(r.ReturnID)/count(s.SaleID))*100 as return_rate
+from ProductSales s
+left join ProductReturns r 
+  on s.ProductID = r.ProductID
+group by 1
+having count(r.ReturnID) > 20 and (count(r.ReturnID)/count(s.SaleID))*100 > 15;
