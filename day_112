@@ -1,0 +1,29 @@
+
+CREATE TABLE CourseEnrollments ( EnrollmentID INT,
+CourseName VARCHAR(100), StudentID INT
+);
+
+INSERT INTO CourseEnrollments (EnrollmentID, CourseName, StudentID) VALUES 
+(1, 'Data Science', 301),
+(2, 'Machine Learning', 302),
+(3, 'Data Science', 303),
+(4, 'Artificial Intelligence', 304), 
+(5, 'Data Science', 305),
+(6, 'Web Development', 306),
+(7, 'Machine Learning', 307),
+(8, 'Web Development', 308),
+(9, 'Artificial Intelligence', 309), 
+(10, 'Data Science', 310),
+(11, 'Machine Learning', 311),
+(12, 'Web Development', 312),
+(13, 'Artificial Intelligence', 313), 
+(14, 'Data Science', 314),
+(15, 'Machine Learning', 315);
+
+Questions : Find the number of students enrolled in each course and filter out courses with fewer than 5 students.
+
+
+select CourseName, count(StudentID) as num_student
+from CourseEnrollments
+group by 1
+having count(StudentID) < 5;
