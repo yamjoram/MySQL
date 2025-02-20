@@ -1,0 +1,19 @@
+CREATE TABLE RealEstateTransactions ( TransactionID INT,
+PropertyName VARCHAR(100),
+City VARCHAR(50),
+SaleDate VARCHAR(20) );
+
+
+INSERT INTO RealEstateTransactions (TransactionID, PropertyName, City, SaleDate) VALUES
+(1, 'Luxury Villa', 'London', '12-05-2023'),
+(2, 'Suburban House', 'Berlin', '01-03-2022'),
+(3, 'Downtown Loft', 'Paris', '25-12-2021'),
+(4, 'Cozy Apartment', 'Madrid', '08-07-2024'),
+(5, 'Lakeside Cabin', 'Geneva', '15-09-2023');
+
+Question : The task is to sort real estate transactions by their sale date, but the dates are stored as text in the SaleDate column, formatted as 'DD-MM-YYYY'. 
+            Since text sorting is lexicographical and doesn't handle dates as expected, we need to first convert the text into a valid date format for correct sorting.
+
+select *
+from RealEstateTransactions
+order by str_to_date(SaleDate, "%d-%m-%Y");
