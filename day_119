@@ -1,0 +1,17 @@
+CREATE TABLE RealEstateProperties ( PropertyID INT,
+PropertyName VARCHAR(100), City VARCHAR(50),
+Price DECIMAL(10, 2),
+SquareFeet INT );
+
+INSERT INTO RealEstateProperties (PropertyID, PropertyName, City, Price, SquareFeet) VALUES
+(1, 'Seaside Cottage', 'Miami', 800000.00, 2000),
+(2, 'Downtown Loft', 'Seattle', 1200000.00, 1500),
+(3, 'Suburban House', 'Austin', 350000.00, 2500), 
+(4, 'Lakefront Cabin', 'Denver', 900000.00, 1800);
+
+Question : Retrieve Properties Sorted by Price-per-Square-Foot Value
+
+
+select *, Price/SquareFeet as price_per_square_feet
+from RealEstateProperties
+order by Price/SquareFeet;
