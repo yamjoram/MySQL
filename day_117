@@ -1,0 +1,17 @@
+CREATE TABLE PropertyListings ( ListingID INT,
+PropertyName VARCHAR(100), City VARCHAR(50),
+Price DECIMAL(10, 2)
+);
+INSERT INTO PropertyListings (ListingID, PropertyName, City, Price) VALUES 
+(1, 'Luxury Villa', 'Miami', 2500000.00),
+(2, 'Cozy Condo', 'San Diego', 800000.00),
+(3, 'Suburban House', 'Austin', 350000.00),
+(4, 'Downtown Loft', 'Seattle', 1200000.00), 
+(5, 'Lakefront Cabin', 'Denver', 900000.00);
+
+
+Question : Sort Properties by Price in Ascending Order
+
+select *
+from PropertyListings
+order by 4;
