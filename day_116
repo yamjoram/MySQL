@@ -1,0 +1,18 @@
+CREATE TABLE Beverages (
+BeverageID INT, BeverageName VARCHAR(50), Size VARCHAR(50),
+Price DECIMAL(10, 2)
+);
+-- Datasets
+INSERT INTO Beverages (BeverageID, BeverageName, Size, Price) VALUES 
+(1, 'Latte', 'Tall', 3.50),
+(2, 'Latte', 'Grande', 4.00),
+(3, 'Latte', 'Venti', 4.50),
+(4, 'Espresso', 'Solo', 2.50),
+(5, 'Espresso', 'Doppio', 3.00);
+
+Questions : Get all distinct sizes of beverages offered, but ensure that the sizes are ordered by their price in descending order.
+
+
+select distinct Size, Price
+from Beverages
+order by 2 desc;
