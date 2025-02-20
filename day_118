@@ -1,0 +1,18 @@
+CREATE TABLE LuxuryProperties ( PropertyID INT,
+PropertyName VARCHAR(100), City VARCHAR(50),
+Price DECIMAL(10, 2), YearBuilt INT
+);
+
+INSERT INTO LuxuryProperties (PropertyID, PropertyName, City, Price, YearBuilt) VALUES
+(1, 'Skyline Villa', 'New York', 2000000.00, 2015),
+(2, 'Ocean Breeze', 'Miami', 1500000.00, NULL),
+(3, 'Mountain Retreat', 'Denver', 2500000.00, 2020),
+(4, 'City Penthouse', 'Los Angeles', 1200000.00, 2018);
+
+Question : Sort Properties by Year Built with Unknown Years Last i.e null to be in last.
+
+
+SELECT * FROM LuxuryProperties 
+ORDER BY 
+    (YearBuilt IS NULL),  -- Places NULL values last
+    YearBuilt ASC;
