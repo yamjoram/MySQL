@@ -1,0 +1,30 @@
+
+CREATE TABLE ProjectEmployees (ProjectID INT,
+EmployeeID INT );
+
+CREATE TABLE Projects ( ProjectID INT,
+ProjectName VARCHAR(100),
+        Deadline DATE
+    );
+
+
+INSERT INTO Projects (ProjectID, ProjectName, Deadline) VALUES 
+(1, 'Project Alpha', '2024-12-01'),
+(2, 'Project Beta', '2023-08-15'),
+(3, 'Project Gamma', '2023-11-30');
+INSERT INTO ProjectEmployees (ProjectID, EmployeeID) VALUES (1, 101),
+(1, 102),
+(1, 103),
+    (2, 104),
+    (3, 105);
+
+Questions : The task is to sort projects by their deadline in ascending order and count the number of employees involved in each project. 
+            The data is spread across two tables: Projects and ProjectEmployees.
+    
+    
+select p.ProjectID, p.ProjectName, p.Deadline, count(e.EmployeeID) as num_of_employee
+from Projects p 
+left join ProjectEmployees e 
+on e.ProjectID = p.ProjectID
+group by 1, 2 , 3
+order by p.Deadline;
