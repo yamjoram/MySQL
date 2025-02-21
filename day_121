@@ -1,0 +1,22 @@
+CREATE TABLE Employees ( EmployeeID INT,
+EmployeeName VARCHAR(100),
+Department VARCHAR(50),
+Salary DECIMAL(10, 2) );
+
+
+INSERT INTO Employees (EmployeeID, EmployeeName, Department, Salary) VALUES 
+(1, 'Alice', 'Engineering', 90000.00),
+(2, 'Bob', 'HR', 50000.00),
+(3, 'Charlie', 'Engineering', 95000.00),
+(4, 'Diana', 'Marketing', 60000.00), 
+(5, 'Eve', 'HR', 55000.00),
+(6, 'Frank', 'Marketing', 75000.00);
+
+Questions : The task is to retrieve all employees, sorted first by their Department, and then by their Salary in descending order within each department. 
+            Additionally, calculate the average salary for each department.
+
+
+select EmployeeName, Department, sum(Salary) as Salary, avg(Salary) as avg_salary
+from Employees
+group by 1, 2
+order by Department, Salary desc;
