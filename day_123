@@ -1,0 +1,37 @@
+CREATE TABLE Students ( StudentID INT,
+StudentName VARCHAR(100));
+
+CREATE TABLE Marks ( StudentID INT,
+Subject VARCHAR(50),
+Marks INT );
+
+
+INSERT INTO Students (StudentID, StudentName) VALUES 
+(1, 'Alice'),
+(2, 'Bob'),
+(3, 'Charlie'),
+(4, 'Diana');
+INSERT INTO Marks (StudentID, Subject, Marks) VALUES 
+(1, 'Math', 95),
+(1, 'Science', 90),
+(1, 'English', 85),
+(2, 'Math', 80), 
+(2, 'Science', 70),
+(2, 'English', 85), 
+(3, 'Math', 100), 
+(3, 'Science', 90), 
+(3, 'English', 85),
+(4, 'Math', 75),
+(4, 'Science', 65), 
+(4, 'English', 70);
+
+Questions : The task is to retrieve all students, sort them by their total marks in descending order,
+            and filter only those students whose total marks exceed a specific threshold (e.g., 250).
+
+select s.StudentID, s.StudentName, sum(m.Marks) as total_mark 
+from Students s 
+left join Marks m 
+  on s.StudentID = m.StudentID
+group by 1, 2
+having sum(m.Marks) > 250
+order by 3 desc;
