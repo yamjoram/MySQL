@@ -1,0 +1,86 @@
+
+CREATE TABLE Students ( StudentID INT,
+Name VARCHAR(50) );
+CREATE TABLE Grades ( StudentID INT,
+Grade VARCHAR(2) );
+
+INSERT INTO Students (StudentID, Name) VALUES
+(1, 'John'),
+(2, 'Alice'),
+(3, 'Bob'),
+(4, 'Emily'),
+(5, 'Michael'), 
+(6, 'Sophia'),
+(7, 'Daniel'),
+(8, 'Olivia'),
+(9, 'William'),
+(10, 'Ava'),
+(11, 'James'), 
+(12, 'Emma'),
+(13, 'Alexander'),
+(14, 'Mia'),
+(15, 'Benjamin'), 
+(16, 'Charlotte'),
+(17, 'Ethan'),
+(18, 'Amelia'), 
+(19, 'Elijah'), 
+(20, 'Harper'),
+(21, 'Henry'), 
+(22, 'Evelyn'),
+(23, 'Jacob'), 
+(24, 'Abigail'), 
+(25, 'Matthew'),
+(26, 'Emily'), 
+(27, 'David'), 
+(28, 'Liam'),
+(29, 'Avery'), 
+(30, 'Michael'), 
+(31, 'Sofia'), 
+(32, 'Lucas'),
+(33, 'Madison'),
+(34, 'Ella'),
+(35, 'Logan');
+
+INSERT INTO Grades (StudentID, Grade) VALUES
+    (1, 'A'),
+    (2, 'B'),
+    (3, 'C'),
+    (4, 'B'),
+    (5, 'A'),
+    (6, 'B'),
+    (7, 'A'),
+    (8, 'C'),
+    (9, 'A'),
+    (10, 'B'),
+    (11, 'B'),
+    (12, 'C'),
+    (13, 'A'),
+    (14, 'B'),
+    (15, 'C'),
+    (16, 'A'),
+    (17, 'A'),
+    (18, 'B'),
+    (19, 'C'),
+    (20, 'A'),
+    (21, 'A'),
+    (22, 'B'),
+    (23, 'B'),
+    (24, 'C'),
+    (25, 'A'),
+    (26, 'B'),
+    (27, 'C'),
+    (28, 'A'),
+    (29, 'A'),
+    (30, 'B'),
+    (31, 'B'),
+    (32, 'C'),
+    (33, 'A'),
+    (34, 'B'),
+    (35, 'C');
+
+Questions : Write an SQL query to retrieve all students along with their grades.
+
+select s.StudentID, s.Name, g.Grade
+from Students s 
+left join Grades g 
+  on s.StudentID = g.StudentID;
