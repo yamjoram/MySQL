@@ -1,0 +1,30 @@
+CREATE TABLE Employees ( EmployeeID INT,
+Name VARCHAR(50),
+DepartmentID INT );
+CREATE TABLE Departments ( DepartmentID INT, DepartmentName VARCHAR(50)
+);
+
+INSERT INTO Employees (EmployeeID, Name, DepartmentID) VALUES
+(1, 'John', 1),
+(2, 'Alice', 2), 
+(3, 'Bob', 1),
+(4, 'Emily', 3), 
+(5, 'Michael', 2), 
+(6, 'Sophia', 1), 
+(7, 'Daniel', 2), 
+(8, 'Olivia', 3),
+(9, 'William', 1),
+(10, 'Ava', 2);
+
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES
+(1, 'Human Resources'),
+(2, 'Finance'),
+(3, 'Marketing');
+
+Questions : Write an SQL query to retrieve all employees along with their department names.
+
+
+select e.EmployeeID, e.Name, d.DepartmentName
+from Employees e 
+left join Departments d 
+  on e.DepartmentID = d.DepartmentID;
