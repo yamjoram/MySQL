@@ -1,0 +1,67 @@
+CREATE TABLE Customers (CustomerID INT,
+CustomerName VARCHAR(50) );
+CREATE TABLE Orders ( OrderID INT,
+CustomerID INT,
+TotalAmount DECIMAL(10, 2) );
+
+INSERT INTO Customers (CustomerID, CustomerName) VALUES
+(101, 'John Doe'),
+(102, 'Alice Smith'), 
+(103, 'Bob Johnson'), 
+(104, 'Emily Brown'), 
+(105, 'Michael Wilson'),
+(106, 'Sophia Taylor'), 
+(107, 'Daniel Anderson'), 
+(108, 'Olivia Martinez'),
+(109, 'William Garcia'), 
+(110, 'Ava Lopez'),
+(111, 'James Lee'),
+(112, 'Emma Hernandez'),
+(113, 'Alexander Adams'), 
+(114, 'Mia Evans'),
+(115, 'Benjamin Baker'), 
+(116, 'Charlotte Hill'),
+(117, 'Ethan Nelson'), 
+(118, 'Amelia Green'), 
+(119, 'Elijah Carter'),
+(120, 'Harper Hughes'),
+(121, 'Henry Flores'),
+(122, 'Evelyn Collins'), 
+(123, 'Jacob Stewart'), 
+(124, 'Abigail Morris'),
+(125, 'Matthew Rogers');
+
+INSERT INTO Orders (OrderID, CustomerID, TotalAmount) VALUES
+(1, 101, 100.50), 
+(2, 102, 200.75),
+(3, 103, 350.20), 
+(4, 104, 450.90),
+(5, 105, 550.25), 
+(6, 106, 450.00),
+(7, 107, 600.75), 
+(8, 108, 700.50), 
+(9, 109, 800.25),
+(10, 110, 900.00), 
+(11, 111, 1000.50), 
+(12, 112, 1050.75), 
+(13, 113, 1200.20), 
+(14, 114, 1350.90),
+(15, 115, 1450.25), 
+(16, 116, 1550.00),
+(17, 117, 1600.75), 
+(18, 118, 1700.50), 
+(19, 119, 1800.25), 
+(20, 120, 1900.00),
+(21, 121, 2000.50), 
+(22, 122, 2100.75),
+(23, 123, 2200.20), 
+(24, 124, 2300.90),
+(25, 125, 2400.25);
+
+Questions : Write an SQL query to select all orders along with their customer names.
+
+select o.OrderID, c.CustomerName, sum(o.TotalAmount) as total_amount
+from Orders o 
+left join Customers c 
+  on o.CustomerID = c.CustomerID
+group by 1, 2;
