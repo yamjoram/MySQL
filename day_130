@@ -1,0 +1,31 @@
+
+CREATE TABLE Subjects ( SubjectID INT,SubjectName VARCHAR(50) );
+CREATE TABLE Teachers ( TeacherID INT,
+Name VARCHAR(50),
+        SubjectID INT
+    );
+INSERT INTO Subjects (SubjectID, SubjectName) VALUES
+(1, 'Mathematics'), 
+(2, 'Physics'),
+(3, 'Biology'),
+(4, 'History'),
+(5, 'English');
+
+INSERT INTO Teachers (TeacherID, Name, SubjectID) VALUES
+(101, 'Mr. Smith', 1), 
+(102, 'Ms. Johnson', 2),
+(103, 'Mrs. Lee', 3), 
+(104, 'Mr. Garcia', 4), 
+(105, 'Dr. Martinez', 5), 
+(106, 'Ms. Clark', 1), 
+(107, 'Mr. Rodriguez', 2), 
+(108, 'Mrs. Wilson', 3),
+(109, 'Mr. Taylor', 4),
+(110, 'Ms. Brown', 5);
+
+Questions : Write an SQL query to select all teachers along with the subjects they teach.
+
+select t.TeacherID, t.Name, s.SubjectName
+from Teachers t 
+left join Subjects s 
+  on t.SubjectID = s.SubjectID
