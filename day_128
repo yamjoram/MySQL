@@ -1,0 +1,29 @@
+CREATE TABLE Categories ( CategoryID INT,
+CategoryName VARCHAR(50) );
+CREATE TABLE Products ( ProductID INT,
+ProductName VARCHAR(50),
+CategoryID INT );
+INSERT INTO Categories (CategoryID, CategoryName) VALUES
+(1, 'Electronics'),
+(2, 'Clothing'),
+(3, 'Books'),
+(4, 'Home Appliances'), 
+(5, 'Toys');
+INSERT INTO Products (ProductID, ProductName, CategoryID) VALUES
+(101, 'Laptop', 1),
+(102, 'Smartphone', 1), 
+(103, 'T-shirt', 2),
+(104, 'Jeans', 2),
+(105, 'Novel', 3),
+(106, 'Cookbook', 3),
+(107, 'Refrigerator', 4),
+(108, 'Washing Machine', 4), 
+(109, 'Action Figure', 5), 
+(110, 'Board Game', 5);
+
+Questions : Write an SQL query to select all products along with their category names.
+
+select p.ProductID, p.ProductName, c.CategoryName
+from Products p 
+left join Categories c 
+on p.CategoryID = c.CategoryID;
