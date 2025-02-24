@@ -16,3 +16,17 @@ SELECT c.CustomerName, o.TotalAmount, p.ProductName FROM Customers c
 JOIN Orders o ON c.CustomerID = o.CustomerID
 JOIN Products p ON o.OrderID = p.ProductID
 JOIN Categories cat ON p.CategoryID = cat.CategoryID WHERE cat.CategoryName IN ('Electronics', 'Books');
+
+
+Question: Write an SQL query to retrieve the list of employees who have the same manager and their corresponding manager's name. 
+  You need to use a self-join on the Employees table. The result should show the employee's name and the name of their manager.
+
+CREATE TABLE Employees ( EmployeeID INT,
+Name VARCHAR(50),
+    ManagerID INT
+);
+
+SELECT e1.Name AS EmployeeName, e2.Name AS ManagerName 
+FROM Employees e1
+JOIN Employees e2 ON e1.ManagerID = e2.EmployeeID
+ORDER BY e1.Name;
