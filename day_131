@@ -1,0 +1,55 @@
+CREATE TABLE Customers ( CustomerID INT,
+CustomerName VARCHAR(50) );
+CREATE TABLE Orders ( OrderID INT,
+CustomerID INT,
+TotalAmount DECIMAL(10, 2) );
+CREATE TABLE Products ( ProductID INT,
+ProductName VARCHAR(50),
+CategoryID INT );
+CREATE TABLE Categories ( CategoryID INT,
+CategoryName VARCHAR(50) );
+
+INSERT INTO Customers (CustomerID, CustomerName) VALUES
+(1, 'John Doe'),
+(2, 'Alice Smith'),
+(3, 'Bob Johnson'), 
+(4, 'Emily Brown');
+
+INSERT INTO Orders (OrderID, CustomerID, TotalAmount) VALUES
+(101, 1, 100.50), 
+(102, 2, 200.75), 
+(103, 3, 350.20), 
+(104, 4, 450.90);
+
+
+INSERT INTO Products (ProductID, ProductName, CategoryID)
+VALUES
+(101, 'Laptop', 1),
+(102, 'Smartphone', 1),
+(103, 'Novel', 3),
+(104, 'Cookbook', 3), 
+(105, 'Headphones', 1),
+(106, 'Action Figure', 5);
+
+
+INSERT INTO Categories (CategoryID, CategoryName) VALUES
+(1, 'Electronics'),
+(2, 'Clothing'),
+(3, 'Books'),
+(4, 'Home Appliances'),
+(5, 'Toys');
+
+Questions : Write an SQL query to retrieve the list of customers who have made orders for products in the 
+            "Electronics" or "Books" categories, including their names, order total amounts, and the product names. 
+            The query should include data from the following tables: Customers, Orders, Products, and Categories.
+
+
+select c.CustomerID, c.CustomerName, o.OrderID, o.TotalAmount, p.ProductName, ca.CategoryName
+from Customers c 
+left join Orders o 
+  on c.CustomerID = o.CustomerID 
+left join Products p 
+  on p.ProductID = o.OrderID 
+left join Categories ca 
+  on ca.CategoryID = p.CategoryID
+where ca.CategoryName in ("Electronics", "Books");
