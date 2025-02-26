@@ -1,0 +1,47 @@
+CREATE TABLE Employees ( ID INT,
+Name VARCHAR(50),
+DepartmentID INT );
+
+
+INSERT INTO Employees (ID, Name, DepartmentID) VALUES
+(1, 'John', 5),
+(2, 'Alice', 3), 
+(3, 'Bob', 5),
+(4, 'Jane', 7),
+(5, 'Sam', 5),
+(6, 'Emily', 2),
+(7, 'Michael', 5),
+(8, 'Sophia', 4),
+(9, 'Daniel', 5), 
+(10, 'Olivia', 6), 
+(11, 'William', 5), 
+(12, 'Ava', 5),
+(13, 'James', 5), 
+(14, 'Emma', 3),
+(15, 'Alexander', 5), 
+(16, 'Mia', 5),
+(17, 'Benjamin', 1), 
+(18, 'Charlotte', 5), 
+(19, 'Ethan', 5), 
+(20, 'Amelia', 5),
+(21, 'Elijah', 5), 
+(22, 'Harper', 5), 
+(23, 'Henry', 5), 
+(24, 'Evelyn', 5), 
+(25, 'Jacob', 5), 
+(26, 'Abigail', 5), 
+(27, 'Matthew', 5), 
+(28, 'Emily', 5), 
+(29, 'David', 5),
+(30, 'Liam', 5),
+(31, 'Avery', 5), 
+(32, 'Michael', 5), 
+(33, 'Sofia', 5), 
+(34, 'Lucas', 5), 
+(35, 'Madison', 5);
+
+Questions : Write an SQL query to select all employees who belong to the department with ID 5.
+
+select ID,Name, DepartmentID
+from Employees
+where DepartmentID = 5;
