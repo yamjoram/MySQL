@@ -1,0 +1,24 @@
+
+CREATE TABLE Students ( StudentID INT,
+Name VARCHAR(50) );
+CREATE TABLE Grades ( StudentID INT,
+Grade VARCHAR(2) );
+INSERT INTO Students (StudentID, Name) VALUES
+           (1, 'John'),
+           (2, 'Alice'),
+           (3, 'Bob'),
+           (4, 'Emily');
+           
+  INSERT INTO Grades (StudentID, Grade) VALUES
+           (1, 'A'),
+           (2, 'B'),
+           (NULL, 'C'),
+           (4, 'B');
+
+Questions : Write an SQL query to select all grades along with the student names. 
+            Include grades without a corresponding student.
+
+select g.Grade, s.Name
+from Grades g 
+left join Students s 
+  on s.StudentID = g.StudentID;
