@@ -1,0 +1,18 @@
+CREATE TABLE Employees (
+EmployeeID INT, EmployeeName VARCHAR(50), DOJ DATE,
+Department VARCHAR(50), Salary DECIMAL(10, 2)
+);
+
+INSERT INTO Employees (EmployeeID, EmployeeName, DOJ, Department, Salary) VALUES
+(1, 'Alice', '2015-01-10', 'Engineering',100000.00),
+(2, 'Bob', '2017-06-25', 'HR', 95000.00),
+(3, 'Charlie', '2014-08-15', 'Marketing',70000.00),
+(4, 'David', '2019-04-01', 'Engineering', 75000.00),
+(5, 'Eve', '2016-03-22', 'HR', 80000.00);
+
+Questions : Select the employee name and their date of joining (DOJ) who joined the earliest from the Employees table.
+
+
+select EmployeeName, DOJ
+from Employees
+where DOJ = (select min(DOJ) from Employees);
