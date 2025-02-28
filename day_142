@@ -1,0 +1,50 @@
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(100)
+);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+CREATE TABLE OrderItems (
+    OrderItemID INT PRIMARY KEY,
+    OrderID INT,
+    ProductName VARCHAR(100),
+    Quantity INT,
+    UnitPrice DECIMAL(10, 2),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
+
+INSERT INTO Customers (CustomerID, CustomerName) VALUES
+    (1, 'John Doe'),
+    (2, 'Jane Smith'),
+    (3, 'Alice Johnson');
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate) VALUES
+    (101, 1, '2025-01-01'),
+    (102, 2, '2025-01-02'),
+    (103, 3, '2025-01-03');
+
+INSERT INTO OrderItems (OrderItemID, OrderID, ProductName, Quantity, UnitPrice) VALUES
+    (201, 101, 'Laptop', 1, 1000.00),
+    (202, 102, 'Mouse', 2, 25.00),
+    (203, 102, 'Keyboard', 1, 50.00),
+    (204, 103, 'Monitor', 1, 200.00);
+
+
+Questions : Find the customer with the highest total purchase value based on their orders and order items.
+    
+select * from (    
+select c.CustomerID, c.CustomerName, sum(i.Quantity * i.UnitPrice) as total_purchased,
+dense_rank() over(order by sum(i.Quantity * i.UnitPrice) desc) as rnk
+from Customers c 
+left join Orders o 
+ON c.CustomerID = o.CustomerID
+left join OrderItems i 
+  on i.OrderID = o.OrderID
+group by 1, 2) as sub 
+where rnk = 1;
