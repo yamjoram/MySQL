@@ -1,0 +1,43 @@
+CREATE TABLE Employees (
+id INT PRIMARY KEY,
+name VARCHAR(255), 
+department VARCHAR(255), 
+managerId INT
+);
+
+
+INSERT INTO Employees (id, name, department, managerId) VALUES 
+(101, 'John', 'A', NULL),
+(102, 'Dan', 'A', 101),
+(103, 'James', 'A', 101),
+(104, 'Amy', 'A', 101), 
+(105, 'Anne', 'A', 101), 
+(106, 'Ron', 'B', 101), 
+(107, 'Michael', 'C', NULL), 
+(108, 'Sarah', 'C', 107),
+(109, 'Emily', 'C', 107),
+(110, 'Brian', 'C', 107);
+
+
+Questions : Write a SQL query to find the names of managers who have at least five direct reports. Ensure that no employee is their own manager. 
+            Return the result table in any order.
+
+
+
+select e2.name as manager_name, count(e2.id) as cnt_report from Employees e1 
+left join Employees e2
+  on e1.managerId = e2.id
+where e1.managerId is not null
+group by 1
+having count(e2.id) >= 5;
+
+
+Alternatives : 
+
+select name from Employees
+where id = (
+select managerId
+from Employees
+where managerId is not null 
+group by managerId
+having count(*) >= 5);
