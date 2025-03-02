@@ -1,0 +1,34 @@
+
+CREATE TABLE Orders ( 
+OrderID INT PRIMARY KEY, 
+OrderDate DATE
+);
+
+
+CREATE TABLE OrderItems ( 
+OrderItemID INT PRIMARY KEY,
+OrderID INT,
+ProductID INT,
+FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+FOREIGN KEY (ProductID) REFERENCES Products(ProductID) );
+
+
+INSERT INTO Products VALUES 
+(1, 'Laptop'),
+(2, 'Mouse'),
+(3, 'Keyboard'),
+(4, 'Monitor');
+
+INSERT INTO Orders VALUES 
+(101, '2025-01-01'), 
+(102, '2025-01-02');
+
+INSERT INTO OrderItems VALUES 
+(201, 101, 1),
+(202, 102, 2);
+
+Questions : Write a query to find the names of products that have never been ordered.
+
+select ProductID, ProductName
+from Products 
+where ProductID  not in (select ProductID from OrderItems);
