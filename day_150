@@ -1,0 +1,38 @@
+CREATE TABLE Categories (
+CategoryID INT PRIMARY KEY, 
+CategoryName VARCHAR(100)
+);
+
+
+CREATE TABLE Products (
+ProductID INT PRIMARY KEY,
+ProductName VARCHAR(100),
+CategoryID INT,
+Price DECIMAL(10, 2),
+FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+);
+
+
+INSERT INTO Categories VALUES
+(1, 'Electronics'),
+(2, 'Furniture'),
+(3, 'Clothing');
+
+
+INSERT INTO Products VALUES 
+(1, 'Laptop', 1, 1500.00), 
+(2, 'Smartphone', 1, 800.00),
+(3, 'Table', 2, 200.00),
+(4, 'Chair', 2, 100.00), 
+(5, 'T-Shirt', 3, 30.00), 
+(6, 'Jeans', 3, 50.00);
+
+Questions : Write a query to find the most expensive product in each category. 
+
+select * from (
+select c.CategoryName, p.ProductName, p.Price, 
+dense_rank() over(partition by c.CategoryName order by p.Price desc) as rnk
+from Categories c
+left join Products p 
+  on p.CategoryID = c.CategoryID) as sub 
+where rnk = 1;
