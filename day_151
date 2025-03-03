@@ -1,0 +1,38 @@
+CREATE TABLE Employees ( 
+EmployeeID INT PRIMARY KEY, 
+EmployeeName VARCHAR(100), 
+DepartmentID INT);
+
+CREATE TABLE Departments ( 
+DepartmentID INT PRIMARY KEY, 
+DepartmentName VARCHAR(100));
+
+CREATE TABLE Salaries (
+EmployeeID INT,
+Salary DECIMAL(10, 2),
+FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID) );
+
+
+INSERT INTO Employees VALUES 
+(1, 'Arun Kumar', 1),
+(2, 'Priya Sharma', 2),
+(3, 'Ravi Patel', 1),
+(4, 'Sita Mehta', 3);
+INSERT INTO Departments VALUES 
+(1, 'HR'),
+(2, 'Finance'),
+(3, 'Marketing');
+INSERT INTO Salaries VALUES
+(1, 50000),
+(2, 70000),
+(3, 60000),
+(4, 80000);
+
+Questions : Calculate the department-wise average salary using a Common Table Expression (CTE).
+
+
+with cte as (select e.EmployeeID, d.DepartmentID, d.DepartmentName from Employees e 
+              left join Departments d on d.DepartmentID = e.DepartmentID)
+select c.DepartmentName, avg(s.Salary) from cte c left join Salaries s 
+on c.EmployeeID = s.EmployeeID
+group by 1;
