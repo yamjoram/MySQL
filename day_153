@@ -1,0 +1,38 @@
+CREATE TABLE Patients ( 
+PatientID INT PRIMARY KEY, 
+PatientName VARCHAR(100), Age INT,
+Gender VARCHAR(10)
+);
+
+CREATE TABLE Appointments ( 
+AppointmentID INT PRIMARY KEY, 
+PatientID INT,
+AppointmentDate DATE,
+DoctorID INT,
+FOREIGN KEY (PatientID) REFERENCES Patients(PatientID) );
+
+
+INSERT INTO Patients VALUES
+(1, 'Anita Roy', 35, 'Female'), 
+(2, 'Sandeep Kumar', 40, 'Male'), 
+(3, 'Ravi Gupta', 28, 'Male'),
+(4, 'Priya Sharma', 55, 'Female');
+
+INSERT INTO Appointments VALUES 
+(1, 1, '2024-01-01', 101),
+(2, 1, '2024-02-01', 102),
+(3, 1, '2024-03-01', 101),
+(4, 2, '2024-01-10', 103),
+(5, 3, '2024-02-15', 101), 
+(6, 3, '2024-03-10', 102), 
+(7, 4, '2024-04-01', 104), 
+(8, 4, '2024-05-10', 101);
+
+Questions : Find Patients Who Have Visited More Than 3 Times.
+
+select p.PatientID, p.PatientName, count(a.AppointmentID) as cnt 
+from Patients p 
+left join Appointments a 
+on a.PatientID = p.PatientID
+group by 1
+having count(a.AppointmentID) >= 3;
