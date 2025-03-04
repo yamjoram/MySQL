@@ -1,0 +1,54 @@
+
+CREATE TABLE Patients (
+    PatientID INT PRIMARY KEY,
+    PatientName VARCHAR(100)
+);
+
+CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY,
+    DoctorName VARCHAR(100),
+    Specialty VARCHAR(100)
+);
+
+CREATE TABLE Appointments (
+    AppointmentID INT PRIMARY KEY,
+    PatientID INT,
+    AppointmentDate DATE,
+    DoctorID INT,
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+);
+
+INSERT INTO Patients VALUES
+(1, 'Anita Roy'),
+(2, 'Sandeep Kumar'),
+(3, 'Ravi Gupta'),
+(4, 'Priya Sharma');
+
+INSERT INTO Doctors VALUES
+(101, 'Dr. A Sharma', 'Cardiology'),
+(102, 'Dr. B Patel', 'Neurology'),
+(103, 'Dr. C Gupta', 'Orthopedics');
+
+INSERT INTO Appointments VALUES
+(1, 1, '2024-01-01', 101),
+(2, 1, '2024-02-01', 102),
+(3, 1, '2024-03-01', 101),
+(4, 2, '2024-01-10', 103),
+(5, 3, '2024-02-15', 101),
+(6, 3, '2024-03-10', 102),
+(7, 4, '2024-04-01', 103),
+(8, 4, '2024-05-10', 101);
+
+
+Questions : List the Most Frequent Doctor for Each Patient.
+
+select PatientName, DoctorName, cnt from (
+select p.PatientID, p.PatientName, d.DoctorID, d.DoctorName, count(a.DoctorID) as cnt, 
+dense_rank() over(partition by p.PatientID order by count(a.DoctorID) desc) as rnk
+from Patients p 
+left join Appointments a 
+  on p.PatientID = a.PatientID
+left join Doctors d 
+  on d.DoctorID = a.DoctorID
+group by 1, 2, 3, 4) as sub where rnk = 1;
