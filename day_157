@@ -1,0 +1,28 @@
+
+CREATE TABLE Employees (
+EmployeeID INT PRIMARY KEY, 
+Name VARCHAR(100),
+Salary DECIMAL(10, 2), 
+DepartmentID INT
+);
+
+
+CREATE TABLE Departments ( 
+DepartmentID INT PRIMARY KEY, 
+DepartmentName VARCHAR(100)
+);
+
+INSERT INTO Employees VALUES
+(1, 'Oliver Harris', 45000, 1), 
+(2, 'Emily Walker', 52000, 2), 
+(3, 'Charlotte King', 48000, 2),
+(4, 'James Thompson', 56000, 1), 
+(5, 'Liam White', 54000, 1);
+
+Questions : Assign a Unique Row Number to Each Employee in a Department.
+
+select e.Name, d.DepartmentName, e.Salary, 
+row_number() over(partition by e.DepartmentID order by e.Salary desc) as row_num 
+from Employees e 
+left join Departments d 
+  on d.DepartmentID = e.DepartmentID;
