@@ -1,0 +1,17 @@
+CREATE TABLE StaffMembers ( 
+StaffID INT PRIMARY KEY, 
+Name VARCHAR(100), 
+Salary DECIMAL(10, 2)
+);
+
+INSERT INTO StaffMembers VALUES 
+(1, 'William Brown', 49000), 
+(2, 'Sophia Harris', 54000), 
+(3, 'Isabella Clark', 46000), 
+(4, 'Mia Lewis', 55000),
+(5, 'Jacob Davis', 50000);
+
+Questions : List Employees with Their Previous Salary (Using LAG).
+
+select StaffID, Name, lag(Salary,1) over(order by Salary) as previous_salary
+from StaffMembers;
