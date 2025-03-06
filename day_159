@@ -1,0 +1,20 @@
+CREATE TABLE Employees ( 
+EmployeeID INT PRIMARY KEY, 
+Name VARCHAR(100),
+Salary DECIMAL(10, 2)
+);
+
+
+INSERT INTO Employees VALUES 
+(1, 'Harry Williams', 55000), 
+(2, 'Olivia Jackson', 60000), 
+(3, 'George Smith', 58000), 
+(4, 'Charlotte Brown', 67000), 
+(5, 'Amelia Harris', 65000);
+
+Questions : Find the Top 3 Highest Paid Employees Using ROW_NUMBER.
+
+select Name from (
+select EmployeeID, Name, Salary, row_number() over(order by Salary desc) as rnk 
+from Employees) as sub 
+where rnk <= 3;
