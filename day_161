@@ -1,0 +1,17 @@
+CREATE TABLE Employees ( 
+EmployeeID INT PRIMARY KEY, 
+Name VARCHAR(100), 
+Salary DECIMAL(10, 2)
+);
+
+INSERT INTO Employees VALUES 
+(1, 'Lily Martin', 55000), 
+(2, 'James White', 70000),
+(3, 'Benjamin Lewis', 80000), 
+(4, 'Lucas Walker', 95000), 
+(5, 'Mia Scott', 40000);
+
+Questions : Use NTILE to Divide Employees into 4 Salary Groups.
+
+select EmployeeID, Name, Salary, ntile(4) over(order by Salary desc) as salary_group
+from Employees;
