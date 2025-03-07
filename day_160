@@ -1,0 +1,19 @@
+CREATE TABLE Employees (
+EmployeeID INT PRIMARY KEY,
+Name VARCHAR(100),
+Salary DECIMAL(10, 2)
+);
+
+INSERT INTO Employees VALUES 
+(1, 'Lucas Evans', 55000), 
+(2, 'Ava Johnson', 65000),
+(3, 'Ethan Harris', 65000), 
+(4, 'Ella Walker', 47000), 
+(5, 'Mason Davis', 48000);
+
+
+Questions : The task is to rank employees by salary in descending order using the DENSE_RANK() window function. Unlike RANK(), 
+            which skips rank numbers in case of ties, DENSE_RANK() assigns the same rank to tied values but does not skip subsequent ranks.
+
+select EmployeeID, Name, Salary, dense_rank() over(order by Salary desc) as rnk 
+from Employees;
