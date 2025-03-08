@@ -1,0 +1,15 @@
+CREATE TABLE Customers ( 
+CustomerID INT PRIMARY KEY, 
+Name VARCHAR(100),
+Address VARCHAR(200)
+);
+
+INSERT INTO Customers VALUES
+(1, 'John Doe', '1234 Elm St., New York, NY 10001'),
+(2, 'Alice Johnson', '5678 Oak Ave, Los Angeles, CA 90001'),
+(3, 'Bob Brown', '4321 Pine Rd, Chicago, IL 60001');
+
+Questions : Replace Specific Characters in a Text (REPLACE).
+
+select replace(Address, ",", ";") as new_one
+from Customers;
