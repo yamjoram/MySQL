@@ -1,0 +1,16 @@
+CREATE TABLE Employees ( 
+EmployeeID INT PRIMARY KEY, 
+FirstName VARCHAR(50), 
+LastName VARCHAR(50)
+);
+
+INSERT INTO Employees VALUES 
+(1, 'John', 'Black'),
+(2, 'Oliver', 'Smith'),
+(3, 'Emily', 'Harris'),
+(4, 'Daniel', 'Brown');
+
+Questions : Concatenate First and Last Names.
+
+select concat(FirstName," ", LastName) as name 
+from Employees;
