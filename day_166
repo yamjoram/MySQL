@@ -1,0 +1,17 @@
+CREATE TABLE People ( 
+PersonID INT PRIMARY KEY, 
+Name VARCHAR(100), 
+DateOfBirth DATE
+);
+
+INSERT INTO People VALUES
+(1, 'Lucas Green', '1990-04-15'),
+(2, 'Charlotte Brown', '1985-09-25'),
+(3, 'Ethan White', '1992-03-10'),
+(4, 'Mason Harris', '1988-11-05');
+
+Questions : Extract year from date_of_birth.
+
+
+select Name, extract(year from DateOfBirth) as birth_year
+from People;
