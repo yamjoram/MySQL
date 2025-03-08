@@ -1,0 +1,15 @@
+
+CREATE TABLE Products (
+ProductID INT PRIMARY KEY,
+ProductName VARCHAR(255) );
+
+INSERT INTO Products VALUES 
+(1, ' Apple iPhone 12 '),
+(2, ' Samsung Galaxy S21 '), 
+(3, ' Sony Xperia 1 II '),
+(4, ' OnePlus 8 Pro ');
+
+Questions : Remove Extra Spaces in a String (TRIM).
+
+select trim(ProductName) as name 
+from Products;
