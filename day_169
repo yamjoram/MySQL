@@ -1,0 +1,15 @@
+CREATE TABLE Companies ( 
+CompanyID INT PRIMARY KEY, 
+CompanyName VARCHAR(100), 
+Industry VARCHAR(100)
+);
+
+INSERT INTO Companies VALUES
+(1, 'Tech Corp', 'Technology'),
+(2, 'Green Earth Ltd.', 'Environmental'), 
+(3, 'Global Ventures', 'Investment');
+
+Questions : The task is to extract the first 4 characters from the CompanyName column.
+
+select substring(CompanyName, 1, 4) as first_four
+from Companies;
