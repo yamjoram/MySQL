@@ -1,0 +1,18 @@
+CREATE TABLE Countries ( 
+CountryID INT PRIMARY KEY,
+CountryName VARCHAR(100), 
+Continent VARCHAR(50)
+);
+
+
+INSERT INTO Countries VALUES
+(1, 'United States', 'North America'),
+(2, 'India', 'Asia'),
+(3, 'United Kingdom', 'Europe'),
+(4, 'South Korea', 'Asia');
+
+Questions : The task is to find countries with names starting with the word "United".
+
+select CountryName
+from Countries
+where CountryName like "United%";
