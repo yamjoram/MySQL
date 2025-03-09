@@ -1,0 +1,18 @@
+
+CREATE TABLE Startups (
+StartupID INT PRIMARY KEY, 
+StartupName VARCHAR(100), 
+FoundedYear INT
+);
+
+INSERT INTO Startups VALUES
+(1, 'TechFusion Inc.', 2015), 
+(2, 'GreenPlanet LLC', 2018), 
+(3, 'EduTech Solutions', 2020), 
+(4, 'MedicaCorp Ltd.', 2017);
+
+Questions : The task is to find all startups that have the suffix "Inc." or "LLC" in their name using regular expressions (REGEXP).
+
+select StartupName
+from Startups
+where StartupName regexp '(Inc\.|LLC)$';
