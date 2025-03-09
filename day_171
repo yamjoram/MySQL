@@ -1,0 +1,18 @@
+CREATE TABLE Clients ( 
+ClientID INT PRIMARY KEY, 
+ClientName VARCHAR(100), 
+Email VARCHAR(150)
+);
+
+
+INSERT INTO Clients VALUES
+(1, 'Jane Doe', 'jane.doe@example.com'),
+(2, 'Peter Parker', ''),
+(3, 'Clark Kent', 'clark.kent@example.com'), 
+(4, 'Bruce Wayne', NULL);
+
+Questions : The task is to identify clients with either NULL or empty strings ('') in the Email field. 
+
+select ClientName
+from Clients
+where Email is NULL or Email = '';
