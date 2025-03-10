@@ -1,0 +1,16 @@
+CREATE TABLE Users (
+UserID INT PRIMARY KEY, 
+Name VARCHAR(100), 
+Email VARCHAR(150)
+);
+
+INSERT INTO Users VALUES
+(1, 'John Doe', 'john.doe@example.com'), 
+(2, 'Alice Smith', 'alice.smith@us.com'), 
+(3, 'Bob Johnson', 'bob.johnson@uk.org'), 
+(4, 'Sophia Green', 'sophia.green@ca.net');
+
+Questions : Extract Country Code from Email Addresses (REGEX).
+
+select Name, Email, regexp_substr(Email, '@([a-zA-Z]+)') as country_code
+from Users;
