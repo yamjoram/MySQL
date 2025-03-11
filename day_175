@@ -1,0 +1,21 @@
+CREATE TABLE EmployeeRecords (
+EmployeeID INT PRIMARY KEY, 
+JoiningDate VARCHAR(20), 
+Department VARCHAR(100)
+);
+
+INSERT INTO EmployeeRecords (EmployeeID, JoiningDate, Department) VALUES
+(1, '01-12-2020', 'HR'),
+(2, '15-02-2021', 'Finance'),
+(3, '28-06-2019', 'Engineering'),
+(4, '07-08-2018', 'Sales'),
+(5, '20-11-2017', 'Marketing'), 
+(6, '11-05-2022', 'Product'),
+(7, '02-09-2020', 'Operations'), 
+(8, '18-03-2019', 'Legal');
+
+Questions : Convert the JoiningDate (a string) to a date format 'YYYY-MM-DD'.
+
+
+select str_to_date(JoiningDate, "%Y-%m-%d") as nw 
+from EmployeeRecords;
