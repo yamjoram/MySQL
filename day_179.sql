@@ -20,6 +20,9 @@ INSERT INTO UserLogins(UserID, LoginDate) VALUES
 (4, '2024-01-03'),
 (4, '2024-01-04');
 
+Questions : You need to find the longest consecutive streak of days that each user has logged in. 
+            A consecutive streak means there are no gaps (i.e., the difference between consecutive login dates is 1 day). 
+            This requires identifying and grouping consecutive days, then calculating the longest streak for each user.
 
 WITH RankedLogins AS (
     SELECT
