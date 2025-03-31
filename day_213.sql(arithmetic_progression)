@@ -1,0 +1,13 @@
+
+
+Question
+Write a query to generate an arithmetic progression (e.g., 2, 5, 8, 11, 14, ...) starting from 2 with a common difference of 3 up to the 10th term.
+
+
+with recursive arithmetic_progression(n, value) as (
+select 1, 2
+union all 
+select n + 1, value + 3
+from arithmetic_progression
+where n < 10)
+select n, value from arithmetic_progression;
