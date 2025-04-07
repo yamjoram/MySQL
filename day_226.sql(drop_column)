@@ -1,0 +1,23 @@
+
+
+
+Questions : Write an SQL query to remove the Email column from the Employees table.
+
+
+CREATE TABLE Employees (
+EmployeeID INT PRIMARY KEY AUTO_INCREMENT, 
+FirstName VARCHAR(50) NOT NULL,
+LastName VARCHAR(50) NOT NULL,
+HireDate DATE,
+Email VARCHAR(100) );
+
+INSERT INTO Employees (FirstName, LastName, HireDate, Email)
+VALUES
+('John', 'Doe', '2021-05-01', 'john.doe@example.com'),
+('Jane', 'Smith', '2020-07-15', 'jane.smith@example.com');
+
+
+alter TABLE Employees
+drop column Email;
+
+select * from Employees;
