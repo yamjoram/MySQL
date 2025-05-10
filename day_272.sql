@@ -11,12 +11,7 @@ Questions : Write a SQL query to generate a report of the continuous periods whe
 
 
 
-CREATE TABLE Failed (
-fail_date DATE PRIMARY KEY );
 
-CREATE TABLE Succeeded ( 
-success_date DATE PRIMARY KEY
-);
 
 INSERT INTO Failed (fail_date) VALUES
 ('2018-12-28'),
