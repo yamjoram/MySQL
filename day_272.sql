@@ -25,7 +25,7 @@ INSERT INTO Succeeded (success_date) VALUES
 ('2019-01-01'), 
 ('2019-01-02'), 
 ('2019-01-03'), 
-('2019-01-06');
+('2019-01-06');....
 
 
 WITH Combined AS (
